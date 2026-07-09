@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Division;
+use Illuminate\Http\Request;
+
+class DivisionController extends Controller
+{
+    public function index()
+    {
+        // ပြင်ဆင်လိုက်သည့်နေရာ - data ဆွဲပြီး view ဆီ compact ဖြင့် ပို့ပေးထားသည်
+        $divisions = Division::paginate(4);
+
+        return view('admin.divisions.index', compact('divisions'));
+    }
+
+    public function create()
+    {
+        return view('admin.divisions.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Division::create($request->only('name'));
+
+        return redirect()->route('admin.divisions.index')->with('success', 'Division created successfully.');
+    }
+}
