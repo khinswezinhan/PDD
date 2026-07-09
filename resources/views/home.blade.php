@@ -1,5 +1,9 @@
 <x-app-layout>
-    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 
     <div class="pt-20 w-full"> 
         <div x-data="{ 
@@ -26,7 +30,6 @@
                      class="absolute inset-0 w-full h-full">
                     
                     <img :src="slide.image" class="absolute inset-0 w-full h-full object-cover object-center" alt="Pagoda Slider Image">
-                    
                     <div class="absolute inset-0 bg-black/40"></div>
 
                     <div class="absolute inset-0 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-full flex flex-col justify-center items-center sm:items-start z-10">
@@ -66,7 +69,42 @@
         </div>
     </div>
 
-    <section id="famous-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
+    <section id="regions-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 tracking-tight">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</h2>
+            <p class="mt-3 text-lg text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 relative">
+                    <img src="https://images.unsplash.com/photo-1543731068-7e0f5beff43a?q=80&w=500" class="w-full h-full object-cover" alt="ရန်ကုန်တိုင်း">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">ရန်ကုန်တိုင်းဒေသကြီးရှိဘုရားများ</h3>
+                    <p class="mt-2 text-gray-600 text-sm leading-relaxed">ရွှေတိဂုံစေတီတော်၊ ဆူးလေစေတီတော် အပါအဝင် ရန်ကုန်တိုင်းအတွင်းရှိ တန်ခိုးကြီးဘုရားများ။</p>
+                    <a href="#" class="mt-4 inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-sm">ဝင်ရောက်ကြည့်ရှုရန် →</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 relative">
+                    <img src="https://images.unsplash.com/photo-1580136608079-72029d0de130?q=80&w=500" class="w-full h-full object-cover" alt="မန္တလေးတိုင်း">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900">မန္တလေးတိုင်းဒေသကြီးရှိဘုရားများ</h3>
+                    <p class="mt-2 text-gray-600 text-sm leading-relaxed">မဟာမုနိရုပ်ပွားတော်မြတ်ကြီး၊ ကုသိုလ်တော်ဘုရား အပါအဝင် မန္တလေးတိုင်းအတွင်းရှိ ဘုရားများ။</p>
+                    <a href="#" class="mt-4 inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-sm">ဝင်ရောက်ကြည့်ရှုရန် →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="famous-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24 border-t border-gray-100">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 tracking-tight">ထင်ရှားသော ဘုရားများ</h2>
             <p class="mt-3 text-lg text-gray-500">မြန်မာနိုင်ငံတစ်ဝန်းရှိ တန်ခိုးကြီး ထင်ရှားသော စေတီပုထိုးများ</p>
