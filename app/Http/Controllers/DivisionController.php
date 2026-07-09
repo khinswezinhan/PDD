@@ -7,9 +7,23 @@ use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
+    /**
+     * 🌟 မူရင်း Home Page (User View) အတွက်
+     */
     public function index()
     {
-        // ပြင်ဆင်လိုက်သည့်နေရာ - data ဆွဲပြီး view ဆီ compact ဖြင့် ပို့ပေးထားသည်
+        // Home Page မှာ Pagination မလိုဘဲ အကုန်ပြချင်ရင် All() သုံးပါ (သို့မဟုတ်) Paginate(4) သုံးနိုင်ပါတယ်
+        $divisions = Division::all(); 
+
+        return view('home', compact('divisions'));
+    }
+
+    /**
+     * 🌟 Admin Panel က တိုင်းဒေသကြီး List ပြခန်းအတွက် (Function အသစ်ခွဲလိုက်ပါသည်)
+     */
+    public function adminIndex()
+    {
+        // Admin ဘက်မှာ စာမျက်နှာအလိုက် ၄ ခုစီ ခွဲပြမယ်
         $divisions = Division::paginate(4);
 
         return view('admin.divisions.index', compact('divisions'));

@@ -70,38 +70,44 @@
     </div>
 
     <section id="regions-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
-        <div class="text-center mb-12">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="regions-pagodas">
+    
+    <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 tracking-tight">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</h2>
             <p class="mt-3 text-lg text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                <div class="h-48 bg-gray-200 relative">
-                    <img src="https://images.unsplash.com/photo-1543731068-7e0f5beff43a?q=80&w=500" class="w-full h-full object-cover" alt="ရန်ကုန်တိုင်း">
-                    <div class="absolute inset-0 bg-black/10"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">ရန်ကုန်တိုင်းဒေသကြီးရှိဘုရားများ</h3>
-                    <p class="mt-2 text-gray-600 text-sm leading-relaxed">ရွှေတိဂုံစေတီတော်၊ ဆူးလေစေတီတော် အပါအဝင် ရန်ကုန်တိုင်းအတွင်းရှိ တန်ခိုးကြီးဘုရားများ။</p>
-                    <a href="#" class="mt-4 inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-sm">ဝင်ရောက်ကြည့်ရှုရန် →</a>
-                </div>
-            </div>
 
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                <div class="h-48 bg-gray-200 relative">
-                    <img src="https://images.unsplash.com/photo-1580136608079-72029d0de130?q=80&w=500" class="w-full h-full object-cover" alt="မန္တလေးတိုင်း">
-                    <div class="absolute inset-0 bg-black/10"></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        @foreach($divisions as $division)
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-200">
+                
+                <div class="h-48 bg-gray-100 flex items-center justify-center relative">
+                    <img src="https://placehold.co/600x400/f3f4f6/ea580c?text=Pagoda" 
+                         alt="{{ $division->name }}" 
+                         class="w-full h-full object-cover">
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">မန္တလေးတိုင်းဒေသကြီးရှိဘုရားများ</h3>
-                    <p class="mt-2 text-gray-600 text-sm leading-relaxed">မဟာမုနိရုပ်ပွားတော်မြတ်ကြီး၊ ကုသိုလ်တော်ဘုရား အပါအဝင် မန္တလေးတိုင်းအတွင်းရှိ ဘုရားများ။</p>
-                    <a href="#" class="mt-4 inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-sm">ဝင်ရောက်ကြည့်ရှုရန် →</a>
-                </div>
-            </div>
 
-        </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg text-gray-850 mb-2">
+                        {{ $division->name }}
+                    </h3>
+                    
+                    <a href="#" class="inline-flex items-center text-sm font-semibold text-orange-500 hover:text-orange-600 transition decoration-none">
+                        အသေးစိတ်ကြည့်ရန်
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        @endforeach
+
+    </div>
+</div>
     </section>
 
     <section id="famous-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24 border-t border-gray-100">

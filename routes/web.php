@@ -5,9 +5,8 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [DivisionController::class, 'index'])->name('home');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -18,6 +17,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     // တခြား admin route များ...
 });
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
