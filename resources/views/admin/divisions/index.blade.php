@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.app')
 
 @section('content')
     {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN လှမ်းချိတ်ပေးထားပါတယ် --}}
