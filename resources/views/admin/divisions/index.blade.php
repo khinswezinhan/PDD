@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('components.admin-layout')
 
 @section('content')
     {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN လှမ်းချိတ်ပေးထားပါတယ် --}}
@@ -20,7 +20,7 @@
         {{-- Header Section --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h4 class="fw-bold text-dark m-0" style="letter-spacing: -0.5px;">Divisions List</h4>
+                <h4 class="fw-bold text-dark m-0" style="letter-spacing: -0.5px;">တိုင်းဒေသကြီးနှင့် ပြည်နယ်များ</h4>
             </div>
             <a href="{{ route('admin.divisions.create') }}"
                 class="btn btn-primary px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center">
