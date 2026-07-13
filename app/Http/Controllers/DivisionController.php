@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
+    // public function index()
+    // {
+    //     // Home Page မှာ Pagination မလိုဘဲ အကုန်ပြချင်ရင် All() သုံးပါ (သို့မဟုတ်) Paginate(4) သုံးနိုင်ပါတယ်
+    //     $divisions = Division::all();
+
+    //     return view('home', compact('divisions'));
+    // }
+
     public function index()
     {
-        // ရှေ့လည်းမရောက်၊ နောက်လည်းမရောက်ဘဲ မူလနေရာမှာပဲ ငြိမ်နေစေရန် ID အလိုက် စီထားပါသည်
-        $divisions = Division::orderBy('id', 'asc')->paginate(4);
+        // ပြင်ဆင်လိုက်သည့်နေရာ - data ဆွဲပြီး view ဆီ compact ဖြင့် ပို့ပေးထားသည်
+        $divisions = Division::paginate(4);
 
         return view('admin.divisions.index', compact('divisions'));
     }

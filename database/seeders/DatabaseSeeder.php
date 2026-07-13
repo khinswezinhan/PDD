@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Township;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,5 +22,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([UserSeeder::class]);
         $this->call([DivisionSeeder::class]);
+        $this->call([DistrictSeeder::class]);
+        $this->call([TownshipSeeder::class]);
+        $this->call([PagodaSeeder::class]);
+
     }
 }
