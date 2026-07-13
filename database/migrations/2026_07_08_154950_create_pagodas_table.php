@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('photo');
             $table->foreignId('township_id')->constrained()->onDelete('cascade');
-            $table->string('history');
+            $table->longText('history');
             $table->string('address');
             $table->string('website');
-            $table->string('map-link');
+            $table->text('map_link');
             $table->string('status');
             $table->timestamps();
         });

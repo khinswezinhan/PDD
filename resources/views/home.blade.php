@@ -5,6 +5,7 @@
         }
     </style>
 
+    {{-- Slider Section --}}
     <div class="pt-20 w-full"> 
         <div x-data="{ 
                 activeSlide: 1, 
@@ -69,67 +70,92 @@
         </div>
     </div>
 
+    {{-- တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ ကဏ္ဍ --}}
     <section id="regions-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="regions-pagodas">
-    
-    <div class="text-center mb-12">
+        <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 tracking-tight">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</h2>
             <p class="mt-3 text-lg text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
         </div>
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @foreach($divisions as $division)
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-200">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center relative">
+                        <img src="https://placehold.co/600x400/f3f4f6/ea580c?text=Pagoda" 
+                             alt="{{ $division->name }}" 
+                             class="w-full h-full object-cover">
+                    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        
-        @foreach($divisions as $division)
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-200">
-                
-                <div class="h-48 bg-gray-100 flex items-center justify-center relative">
-                    <img src="https://placehold.co/600x400/f3f4f6/ea580c?text=Pagoda" 
-                         alt="{{ $division->name }}" 
-                         class="w-full h-full object-cover">
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">
+                            {{ $division->name }}
+                        </h3>
+                        
+                        <a href="#" class="inline-flex items-center text-sm font-semibold text-orange-500 hover:text-orange-600 transition decoration-none">
+                            အသေးစိတ်ကြည့်ရန်
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-
-                <div class="p-5">
-                    <h3 class="font-bold text-lg text-gray-850 mb-2">
-                        {{ $division->name }}
-                    </h3>
-                    
-                    <a href="#" class="inline-flex items-center text-sm font-semibold text-orange-500 hover:text-orange-600 transition decoration-none">
-                        အသေးစိတ်ကြည့်ရန်
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                </div>
-
-            </div>
-        @endforeach
-
-    </div>
-</div>
+            @endforeach
+        </div>
     </section>
 
     <section id="famous-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24 border-t border-gray-100">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 tracking-tight">ထင်ရှားသော ဘုရားများ</h2>
-            <p class="mt-3 text-lg text-gray-500">မြန်မာနိုင်ငံတစ်ဝန်းရှိ တန်ခိုးကြီး ထင်ရှားသော စေတီပုထိုးများ</p>
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">ထင်ရှားသော ဘုရားများ</h2>
+            <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံတစ်ဝန်းရှိ တန်ခိုးကြီး ထင်ရှားသော စေတီပုထိုးများ</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                <div class="h-48 bg-gray-200 relative">
-                    <div class="absolute inset-0 bg-black/10"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            @forelse($famousPagodas as $pagoda)
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm">
+                    <div>
+                        {{-- 🌟 ပုံအမြင့်ကို h-40 သို့ လျှော့ချထားပါတယ် --}}
+                        <div class="h-40 bg-gray-200 relative">
+                            @if($pagoda->photo)
+                                <img src="{{ asset($pagoda->photo) }}" 
+                                     alt="{{ $pagoda->name }}" 
+                                     class="w-full h-full object-cover">
+                            @else
+                                <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
+                                     alt="{{ $pagoda->name }}" 
+                                     class="w-full h-full object-cover">
+                            @endif
+                           
+                            
+                            
+                        </div>
+
+                        {{-- 🌟 စာသားတွေရဲ့ Padding နဲ့ Font Size တွေကို သေးထားပါတယ် --}}
+                        <div class="p-4">
+                            <h3 class="text-base font-bold text-gray-900 leading-snug">{{ $pagoda->name }}</h3>
+                            
+                            
+
+                            {{-- စာလုံးရေကိုလည်း ၈၀ ထိ လျှော့ဖြတ်ထားလို့ ကတ်မရှည်တော့ပါဘူး --}}
+                            <p class="mt-2 text-gray-500 text-xs leading-relaxed">
+                                {{ Str::limit($pagoda->history, 80, '...') }}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="px-4 pb-4 pt-0">
+                        <a href="#" class="inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
+                            အသေးစိတ်ဖတ်ရန် →
+                        </a>
+                    </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900">ရွှေတိဂုံစေတီတော်</h3>
-                    <p class="mt-2 text-gray-600 text-sm leading-relaxed">ရန်ကုန်မြို့တွင် တည်ရှိပြီး ကမ္ဘာ့အံ့ဖွယ် စေတီတော်ကြီး တစ်ဆူ ဖြစ်ပါသည်။</p>
-                    <a href="#" class="mt-4 inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-sm">အသေးစိတ်ဖတ်ရန် →</a>
+            @empty
+                <div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12 text-gray-400 text-sm">
+                    ထင်ရှားသော စေတီပုထိုးများ ဒေတာ မရှိသေးပါ။
                 </div>
-            </div>
+            @endforelse
         </div>
     </section>
-
+    {{-- ဆက်သွယ်ရန် ကဏ္ဍ --}}
     <section id="contact" class="bg-gray-50 py-16 scroll-mt-24 border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
