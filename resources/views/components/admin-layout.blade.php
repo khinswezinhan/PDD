@@ -22,7 +22,7 @@
 
         @include('admin.layouts.nav')
 
-        <main class="pt-2">
+        <main class="pt-4">
             @yield('content')
         </main>
     </div>

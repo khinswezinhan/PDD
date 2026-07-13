@@ -14,21 +14,21 @@ class DivisionSeeder extends Seeder
     {
         // တိုင်းဒေသကြီးနှင့် ပြည်နယ်များစာရင်း Array
         $divisions = [
-            ['name' => 'မန္တလေးတိုင်းဒေသကြီး'],
-            ['name' => 'ရန်ကုန်တိုင်းဒေသကြီး'],
-            ['name' => 'ပဲခူးတိုင်းဒေသကြီး'],
-            ['name' => 'ဧရာဝတီတိုင်းဒေသကြီး'],
-            ['name' => 'စစ်ကိုင်းတိုင်းဒေသကြီး'],
-            ['name' => 'မကွေးတိုင်းဒေသကြီး'],
-            ['name' => 'တနင်္သာရီတိုင်းဒေသကြီး'],
-            ['name' => 'ကချင်ပြည်နယ်'],
-            ['name' => 'ကယားပြည်နယ်'],
-            ['name' => 'ကရင်ပြည်နယ်'],
-            ['name' => 'ချင်းပြည်နယ်'],
-            ['name' => 'မွန်ပြည်နယ်'],
-            ['name' => 'ရခိုင်ပြည်နယ်'],
-            ['name' => 'ရှမ်းပြည်နယ်'],
-            ['name' => 'နေပြည်တော်ကောင်စီနယ်မြေ'],
+            ['name' => 'မန္တလေးတိုင်းဒေသကြီး', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ရန်ကုန်တိုင်းဒေသကြီး', 'photo' => 'images/divisions/yangon.jpg'],
+            ['name' => 'ပဲခူးတိုင်းဒေသကြီး', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ဧရာဝတီတိုင်းဒေသကြီး', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'စစ်ကိုင်းတိုင်းဒေသကြီး', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'မကွေးတိုင်းဒေသကြီး', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'တနင်္သာရီတိုင်းဒေသကြီး', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ကချင်ပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ကယားပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ကရင်ပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ချင်းပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'မွန်ပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ရခိုင်ပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'ရှမ်းပြည်နယ်', 'photo' => 'images/divisions/mandalay.jpg'],
+            ['name' => 'နေပြည်တော်ကောင်စီနယ်မြေ', 'photo' => 'images/uppatasanti.jpg'],
         ];
 
         // Database ထဲသို့ တစ်ခုချင်းစီ ပတ်၍ ထည့်သွင်းခြင်း

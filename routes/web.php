@@ -28,5 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/divisions', [DivisionController::class, 'index'])->name('admin.divisions.index');
     Route::get('/admin/divisions/create', [DivisionController::class, 'create'])->name('admin.divisions.create');
     Route::post('/admin/divisions', [DivisionController::class, 'store'])->name('admin.divisions.store');
+    Route::get('/admin/divisions/{division}/edit', [DivisionController::class, 'edit'])->name('admin.divisions.edit');
+    Route::put('/admin/divisions/{division}', [DivisionController::class, 'update'])->name('admin.divisions.update');
 });
 require __DIR__.'/auth.php';
