@@ -23,8 +23,6 @@ Route::middleware(['auth'])->group(function () {
     // တခြား admin route များ...
 });
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,17 +40,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/townships', [TownshipController::class, 'index'])->name('admin.townships.index');
     Route::get('/admin/townships/create', [TownshipController::class, 'create'])->name('admin.townships.create');
     Route::post('/admin/townships', [TownshipController::class, 'store'])->name('admin.townships.store');
+    Route::get('/admin/townships/{township}/edit', [TownshipController::class, 'edit'])->name('admin.townships.edit');
+    Route::put('/admin/townships/{township}', [TownshipController::class, 'update'])->name('admin.townships.update');
+    Route::get('/admin/get-districts-by-division/{division_id}', [TownshipController::class, 'getDistrictsByDivision'])->name('admin.get-districts-by-division');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/districts', [DistrictController::class, 'index'])->name('admin.districts.index');
     Route::get('/admin/districts/create', [DistrictController::class, 'create'])->name('admin.districts.create');
     Route::post('/admin/districts', [DistrictController::class, 'store'])->name('admin.districts.store');
+    Route::get('/admin/districts/{district}/edit', [DistrictController::class, 'edit'])->name('admin.districts.edit');
+    Route::put('/admin/districts/{district}', [DistrictController::class, 'update'])->name('admin.districts.update');
+
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/pagodas', [PagodaController::class, 'index'])->name('admin.pagodas.index');
     Route::get('/admin/pagodas/create', [PagodaController::class, 'create'])->name('admin.pagodas.create');
     Route::post('/admin/pagodas', [PagodaController::class, 'store'])->name('admin.pagodas.store');
+    Route::get('/admin/pagodas/{pagoda}/edit', [PagodaController::class, 'edit'])->name('admin.pagodas.edit');
+    Route::put('/admin/pagodas/{pagoda}', [PagodaController::class, 'update'])->name('admin.pagodas.update');
+    Route::get('/admin/get-townships-by-district/{district_id}', [PagodaController::class, 'getTownshipsByDistrict'])->name('admin.get-townships-by-district');
 });
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 fixed w-full top-0 z-50 shadow-sm">
+<nav x-data="{ open: false }" class="bg-gold border-b border-gray-100 w-full shadow-sm">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -9,26 +9,6 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-
-                    <!-- Division Link -->
-                    <x-nav-link :href="route('admin.divisions.index')" :active="request()->routeIs('admin.divisions.*')">
-                        {{ __('Division') }}
-                    </x-nav-link>
-
-                    <!-- District Link -->
-                    <x-nav-link :href="route('admin.districts.index')" :active="request()->routeIs('admin.districts.*')">
-                        {{ __('District') }}
-                    </x-nav-link>
-
-                    <!-- Township Link -->
-                    <x-nav-link :href="route('admin.townships.index')" :active="request()->routeIs('admin.townships.*')">
-                        {{ __('Township') }}
-                    </x-nav-link>
-
-                    <!-- Pagoda Link -->
-                    <x-nav-link :href="route('admin.pagodas.index')" :active="request()->routeIs('admin.pagodas.*')">
-                        {{ __('Pagoda') }}
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -38,9 +18,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <!-- User နာမည်မရှိရင် Guest လို့ပြပြီး Error တက်ခြင်းကို Nullsafe (?->) ဖြင့် ကာကွယ်ထားသည် -->
                             <div>{{ Auth::user()?->name ?? 'Guest Admin' }}</div>
-
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
@@ -69,7 +47,7 @@
                 </x-dropdown>
             </div>
 
-            <!-- Hamburger Menu (Mobile ဖြစ်သွားရင် ပေါ်မည့်ခလုတ်) -->
+            <!-- Hamburger Menu -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -92,21 +70,6 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.divisions.index')" :active="request()->routeIs('admin.divisions.*')">
-                {{ __('Division') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="'#'">
-                {{ __('District') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="'#'">
-                {{ __('Township') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="'#'">
-                {{ __('Pagoda') }}
-            </x-responsive-nav-link>
         </div>
     </div>
 </nav>

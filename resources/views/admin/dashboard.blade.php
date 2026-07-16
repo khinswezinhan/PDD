@@ -1,11 +1,13 @@
 @extends('components.admin-layout')
 
 @section('content')
-    <div class="container-fluid px-md-7" style="max-width: 1140px;">
+    <!-- pt-2 mt-3 ကို ထည့်သွင်းပြီး Layout အသစ်နဲ့ အချိုးကျအောင် ညှိထားပါတယ် -->
+    <div class="container-fluid px-md-4 pt-2 mt-3" style="max-width: 1140px;">
 
         {{-- Header Title --}}
-        <div class="mb-5">
-            <h2 class="h4 font-weight-bold text-dark" style="letter-spacing: -0.5px;">
+        <!-- mb-4 သို့ လျှော့ချပြီး နေရာလွတ်ကို အချိုးကျအောင် လုပ်ထားပါတယ် -->
+        <div class="mb-4">
+            <h2 class="h4 fw-bold text-dark" style="letter-spacing: -0.5px;">
                 {{ __('Admin Dashboard') }}
             </h2>
         </div>
@@ -18,11 +20,13 @@
                         <div class="card h-100 shadow-sm border-start border-primary border-4">
                             <div class="card-body d-flex justify-content-between align-items-start p-4">
                                 <div>
-                                    <p class="text-uppercase text-muted small font-weight-bold mb-1">Total Users</p>
-                                    <h3 class="fw-bold text-dark mb-2" style="font-size: 1.8rem;">
+                                    <p class="text-uppercase text-muted small fw-bold mb-1"
+                                        style="font-size: 0.75rem; letter-spacing: 0.5px;">Total Users</p>
+                                    <h3 class="fw-bold text-dark mb-2" style="font-size: 1.75rem;">
                                         {{ number_format($userCount ?? 0) }}
                                     </h3>
-                                    <div class="text-success small d-flex align-items-center">
+                                    <div class="text-success small d-flex align-items-center fw-medium">
+                                        <i class="fas fa-arrow-up me-1 small"></i>
                                         <span>+{{ $newUsersToday ?? 0 }} New Today</span>
                                     </div>
                                 </div>
@@ -37,11 +41,13 @@
                 <div class="card h-100 shadow-sm border-start border-primary border-4">
                     <div class="card-body d-flex justify-content-between align-items-start p-4">
                         <div>
-                            <p class="text-uppercase text-muted small font-weight-bold mb-1">Total Division</p>
-                            <h3 class="fw-bold text-dark mb-2" style="font-size: 1.8rem;">
+                            <p class="text-uppercase text-muted small fw-bold mb-1"
+                                style="font-size: 0.75rem; letter-spacing: 0.5px;">Total Division</p>
+                            <h3 class="fw-bold text-dark mb-2" style="font-size: 1.75rem;">
                                 {{ number_format($activeDivisionsCount ?? 0) }}
                             </h3>
-                            <div class="text-primary small d-flex align-items-center">
+                            <div class="text-primary small d-flex align-items-center fw-medium">
+                                <i class="fas fa-calendar-alt me-1 small"></i>
                                 <span>+{{ $newDivisionsThisMonth ?? 0 }} This Month</span>
                             </div>
                         </div>

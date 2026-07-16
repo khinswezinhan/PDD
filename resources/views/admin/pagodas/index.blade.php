@@ -20,11 +20,11 @@
         {{-- Header Section --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h4 class="fw-bold text-dark m-0" style="letter-spacing: -0.5px;">ဘုရားစေတီပုထိုးများ</h4>
+                <h4 class="fw-bold text-dark fs-4 m-0" style="letter-spacing: -0.5px;">ဘုရားစေတီပုထိုးများ</h4>
             </div>
             <a href="{{ route('admin.pagodas.create') }}"
                 class="btn btn-primary px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center">
-                Create Pagoda
+                စေတီပုထိုးအသစ်ထည့်ရန်
             </a>
         </div>
 
@@ -34,16 +34,16 @@
                     <thead class="bg-light border-bottom border-secondary-subtle">
                         <tr class="text-secondary small text-uppercase fw-bold"
                             style="font-size: 0.85rem; letter-spacing: 0.5px;">
-                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">No</th>
-                            <th scope="col" class="py-3 ps-3">Pagoda Name</th>
-                            <th scope="col" class="py-3 ps-3">Division Name</th>
-                            <th scope="col" class="py-3 ps-3">District Name</th>
-                            <th scope="col" class="py-3 ps-3">Township Name</th>
-                            <th scope="col" class="py-3 ps-3" style="width: 100px;">Photo</th>
-                            <th scope="col" class="py-3 ps-3">Website</th>
-                            <th scope="col" class="py-3 ps-3">Address</th>
-                            <th scope="col" class="py-3 ps-3" style="width: 200px;">History</th>
-                            <th scope="col" class="py-3 text-end pe-4" style="width: 200px;">Actions</th>
+                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">စဥ်</th>
+                            <th scope="col" class="py-3 ps-3">စေတီပုထိုးအမည်</th>
+                            <th scope="col" class="py-3 ps-3">တိုင်းဒေသကြီး</th>
+                            <th scope="col" class="py-3 ps-3">ခရိုင်</th>
+                            <th scope="col" class="py-3 ps-3">မြို့နယ်</th>
+                            <th scope="col" class="py-3 ps-3" style="width: 100px;">ဓာတ်ပုံ</th>
+                            <th scope="col" class="py-3 ps-3">ဝဘ်ဆိုက်</th>
+                            <th scope="col" class="py-3 ps-3">လိပ်စာ</th>
+                            <th scope="col" class="py-3 ps-3" style="width: 200px;">သမိုင်းအကျဉ်း</th>
+                            <th scope="col" class="py-3 text-end pe-4" style="width: 200px;">ပြင်ဆင်ချက်များ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,19 +79,20 @@
 
                                 {{-- 🌟 (၁) ပုံအစစ်ပေါ်လာအောင် img tag ဖြင့် ပြင်ဆင်ခြင်း --}}
                                 <td class="ps-3 py-3">
-                                    @if($pagoda->photo)
-                                        <img src="{{ asset($pagoda->photo) }}" 
-                                            alt="{{ $pagoda->name }}" 
+                                    @if ($pagoda->photo)
+                                        <img src="{{ asset($pagoda->photo) }}" alt="{{ $pagoda->name }}"
                                             class="rounded shadow-sm border"
                                             style="width: 60px; height: 60px; object-fit: cover;">
                                     @else
-                                        <span class="badge bg-light text-muted border">No Image</span>
+                                        <span class="badge bg-light text-muted border">ဓာတ်ပုံမရှိပါ</span>
                                     @endif
                                 </td>
 
                                 <td class="ps-3 py-3">
-                                    @if($pagoda->website)
-                                        <a href="{{ $pagoda->website }}" target="_blank" class="text-decoration-none small text-truncate d-inline-block" style="max-width: 120px;">
+                                    @if ($pagoda->website)
+                                        <a href="{{ $pagoda->website }}" target="_blank"
+                                            class="text-decoration-none small text-truncate d-inline-block"
+                                            style="max-width: 120px;">
                                             <i class="fas fa-external-link-alt me-1"></i> Visit
                                         </a>
                                     @else
@@ -111,12 +112,12 @@
                                         {{ Str::limit($pagoda->history, 50, '...') }}
                                     </span>
                                 </td>
-                                
+
                                 <td class="text-end pe-4 py-3">
                                     <div class="d-flex justify-content-end gap-2">
-                                        <a href=""
+                                        <a href="{{ route('admin.pagodas.edit', $pagoda->id) }}"
                                             class="btn btn-sm btn-outline-primary px-2 rounded-2 d-inline-flex align-items-center fw-medium">
-                                            <i class="fas fa-edit me-1 small"></i> Edit
+                                            <i class="fas fa-edit me-1 small"></i> ပြင်ဆင်ရန်
                                         </a>
 
                                         {{-- <form action="{{ route('admin.pagodas.destroy', $pagoda->id) }}" method="POST"
@@ -137,7 +138,7 @@
                                 {{-- Column အားလုံးပေါင်း ၁၀ ခု ရှိသွား၍ colspan="10" သို့ ညှိလိုက်ပါသည် --}}
                                 <td colspan="10" class="text-center py-5 text-muted">
                                     <i class="fas fa-folder-open fa-2x mb-3 text-black-50 d-block"></i>
-                                    <span>ဒေတာမရှိသေးပါ။ <strong>Create Pagoda</strong> ခလုတ်မှတစ်ဆင့်
+                                    <span>ဒေတာမရှိသေးပါ။ <strong>စေတီပုထိုးအသစ်ထည့်ရန်</strong> ခလုတ်မှတစ်ဆင့်
                                         စတင်ထည့်သွင်းပါ။</span>
                                 </td>
                             </tr>
