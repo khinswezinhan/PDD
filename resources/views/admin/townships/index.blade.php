@@ -20,11 +20,11 @@
         {{-- Header Section --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h4 class="fw-bold text-dark m-0" style="letter-spacing: -0.5px;">မြို့နယ်များ</h4>
+                <h4 class="fw-bold text-dark fs-4 m-0" style="letter-spacing: -0.5px;">မြို့နယ်များ</h4>
             </div>
             <a href="{{ route('admin.townships.create') }}"
                 class="btn btn-primary px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center">
-                Create Townships
+                မြို့နယ်အသစ်ထည့်ရန်
             </a>
         </div>
 
@@ -32,15 +32,14 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-light border-bottom border-secondary-subtle">
-                        <tr class="text-secondary small text-uppercase fw-bold"
-                            style="font-size: 0.85rem; letter-spacing: 0.5px;">
-                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">No</th>
-                            <th scope="col" class="py-3 ps-3">Township Name</th>
-                            
-                            <th scope="col" class="py-3 ps-3">District Name</th>
-                            <th scope="col" class="py-3 ps-3">Division Name</th>
-                            
-                            <th scope="col" class="py-3 text-end pe-4" style="width: 240px;">Actions</th>
+                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">
+                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">စဥ်</th>
+                            <th scope="col" class="py-3 ps-3">မြို့နယ်အမည်</th>
+
+                            <th scope="col" class="py-3 ps-3">ခရိုင်အမည်</th>
+                            <th scope="col" class="py-3 ps-3">တိုင်းဒေသကြီး/ပြည်နယ်အမည်</th>
+
+                            <th scope="col" class="py-3 text-end pe-4" style="width: 240px;">လုပ်ဆောင်ချက်များ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,13 +65,13 @@
                                         {{ $township->district->division->name ?? 'N/A' }}
                                     </span>
                                 </td>
-                                
+
                                 <td class="text-end pe-4 py-3">
                                     <div class="d-flex justify-content-end gap-2">
                                         {{-- Edit Button --}}
-                                        <a href=""
+                                        <a href="{{ route('admin.townships.edit', $township->id) }}"
                                             class="btn btn-sm btn-outline-primary px-3 rounded-2 d-inline-flex align-items-center fw-medium">
-                                            <i class="fas fa-edit me-1 small"></i> Edit
+                                            <i class="fas fa-edit me-1 small"></i> ပြင်ဆင်ရန်
                                         </a>
 
                                         {{-- Delete Button (အလုပ်လုပ်အောင် Comment ပြန်ဖွင့်ပေးထားပါတယ်) --}}
@@ -93,7 +92,7 @@
                             <tr>
                                 <td colspan="4" class="text-center py-5 text-muted">
                                     <i class="fas fa-folder-open fa-2x mb-3 text-black-50 d-block"></i>
-                                    <span>ဒေတာမရှိသေးပါ။ <strong>Create Township</strong> ခလုတ်မှတစ်ဆင့်
+                                    <span>ဒေတာမရှိသေးပါ။ <strong>မြို့နယ်အသစ်ထည့်ရန်</strong> ခလုတ်မှတစ်ဆင့်
                                         စတင်ထည့်သွင်းပါ။</span>
                                 </td>
                             </tr>

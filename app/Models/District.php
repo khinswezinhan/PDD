@@ -19,7 +19,7 @@ class District extends Model
     }
 
     public function townships(): HasMany
-{
-    return $this->hasMany(Township::class);
-}
+    {
+        return $this->hasMany(Township::class);
+    }
 }
