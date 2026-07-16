@@ -16,17 +16,17 @@
                     </x-nav-link>
 
                     <!-- District Link -->
-                    <x-nav-link :href="'#'">
+                    <x-nav-link :href="route('admin.districts.index')" :active="request()->routeIs('admin.districts.*')">
                         {{ __('District') }}
                     </x-nav-link>
 
                     <!-- Township Link -->
-                    <x-nav-link :href="'#'">
+                    <x-nav-link :href="route('admin.townships.index')" :active="request()->routeIs('admin.townships.*')">
                         {{ __('Township') }}
                     </x-nav-link>
 
                     <!-- Pagoda Link -->
-                    <x-nav-link :href="'#'">
+                    <x-nav-link :href="route('admin.pagodas.index')" :active="request()->routeIs('admin.pagodas.*')">
                         {{ __('Pagoda') }}
                     </x-nav-link>
                 </div>

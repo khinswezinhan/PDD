@@ -1,4 +1,4 @@
-@extends('components('components.admin-layout')')
+@extends('components.admin-layout')
 @section('content')
     {{-- Icons အတွက် FontAwesome CDN --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
