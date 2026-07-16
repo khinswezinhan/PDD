@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/division/{id}', [HomeController::class, 'showDivision'])->name('division.show');
+Route::get('/pagoda/{id}', [HomeController::class, 'showPagoda'])->name('pagoda.show');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

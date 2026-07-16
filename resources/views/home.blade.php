@@ -3,6 +3,30 @@
         html {
             scroll-behavior: smooth;
         }
+        /* Pagination နှင့် အောက်က "ထင်ရှားသော ဘုရားများ" ခေါင်းစဉ် မဝေးတော့ဘဲ ကွက်တိဖြစ်စေမည့် Style */
+        .custom-pagination-wrapper {
+            margin-top: 2rem !important;
+            padding-top: 1rem !important;
+            padding-bottom: 0rem !important;
+        }
+        .custom-pagination-wrapper nav {
+            margin-top: 0 !important;
+        }
+        .custom-pagination-wrapper nav svg {
+            display: inline-block;
+        }
+        .custom-pagination-wrapper nav span[aria-current="page"] span,
+        .custom-pagination-wrapper nav span[aria-current="page"] button {
+            background-color: #f97316 !important;
+            border-color: #f97316 !important;
+            color: white !important;
+        }
+        .custom-pagination-wrapper nav a:hover {
+            color: #ea580c !important;
+        }
+        .custom-pagination-wrapper nav button:hover {
+            color: #ea580c !important;
+        }
     </style>
 
     {{-- Slider Section --}}
@@ -71,79 +95,106 @@
     </div>
 
     {{-- တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ ကဏ္ဍ --}}
-    <section id="regions-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 tracking-tight">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</h2>
-            <p class="mt-3 text-lg text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
+    <section id="regions-pagodas" class="max-w-7xl mx-auto pt-16 pb-6 scroll-mt-24">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</h2>
+            <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            @foreach($divisions as $division)
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-200">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center relative">
-                        <img src="https://placehold.co/600x400/f3f4f6/ea580c?text=Pagoda" 
-                             alt="{{ $division->name }}" 
-                             class="w-full h-full object-cover">
-                    </div>
+        {{-- AJAX နဲ့ Update လုပ်မည့် container --}}
+        <div id="regions-ajax-container">
+            <div class="px-6 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+               @forelse($divisions as $division)
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm">
+                        <div>
+                            <a href="{{ route('division.show', $division->id) }}" class="block h-40 bg-gray-100 relative overflow-hidden">
+                                @if($division->image) 
+                                    <img src="{{ asset('storage/' . $division->image) }}" 
+                                         alt="{{ $division->name }}" 
+                                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                                @else
+                                    <img src="https://placehold.co/600x400/f3f4f6/ea580c?text=Pagoda" 
+                                         alt="{{ $division->name }}" 
+                                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                                @endif
+                            </a>
 
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg text-gray-800 mb-2">
-                            {{ $division->name }}
-                        </h3>
-                        
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-orange-500 hover:text-orange-600 transition decoration-none">
-                            အသေးစိတ်ကြည့်ရန်
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
+                            <div class="p-4">
+                                <h3 class="text-base font-bold text-gray-900 leading-snug mb-1">
+                                    <a href="{{ route('division.show', $division->id) }}" class="text-gray-900 hover:text-orange-500 transition decoration-none">
+                                        {{ $division->name }}
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-gray-500 leading-relaxed">
+                                    {{ $division->name }} အတွင်းရှိ သမိုင်းဝင် တန်ခိုးကြီးဘုရားများ စာရင်း။
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-4 pb-4 pt-0">
+                            <a href="{{ route('division.show', $division->id) }}" class="inline-flex items-center text-xs font-semibold text-orange-500 hover:text-orange-600 transition decoration-none">
+                                အသေးစိတ်ကြည့်ရန်
+                                <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @empty
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12 text-gray-400 text-sm">
+                        တိုင်းဒေသကြီး ဒေတာ မရှိသေးပါ။
+                    </div>
+                @endforelse
+            </div>
+
+            {{-- Pagination --}}
+            <div class="px-6 sm:px-8 custom-pagination-wrapper">
+                {{ $divisions->links() }}
+            </div>
         </div>
     </section>
 
-    <section id="famous-pagodas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24 border-t border-gray-100">
+    {{-- ထင်ရှားသော ဘုရားများ ကဏ္ဍ --}}
+    <section id="famous-pagodas" class="max-w-7xl mx-auto pt-6 pb-16 scroll-mt-24 border-t border-gray-100">
         <div class="text-center mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">ထင်ရှားသော ဘုရားများ</h2>
+            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">တန်ခိုးကြီးဘုရားများ</h2>
             <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံတစ်ဝန်းရှိ တန်ခိုးကြီး ထင်ရှားသော စေတီပုထိုးများ</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div class="px-6 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             @forelse($famousPagodas as $pagoda)
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
                     <div>
-                        {{-- 🌟 ပုံအမြင့်ကို h-40 သို့ လျှော့ချထားပါတယ် --}}
-                        <div class="h-40 bg-gray-200 relative">
-                            @if($pagoda->photo)
-                                <img src="{{ asset($pagoda->photo) }}" 
-                                     alt="{{ $pagoda->name }}" 
-                                     class="w-full h-full object-cover">
-                            @else
-                                <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
-                                     alt="{{ $pagoda->name }}" 
-                                     class="w-full h-full object-cover">
-                            @endif
-                           
-                            
-                            
+                        {{-- 📸 ဘုရားပုံရိပ် (ပုံကို နှိပ်လျှင်လည်း Detail Page သို့ သွားရန် Link ပတ်ပေးထားပြီး Hover Zoom ထည့်ထားသည်) --}}
+                        <div class="h-40 bg-gray-200 relative overflow-hidden">
+                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="block w-full h-full">
+                                @if($pagoda->photo)
+                                    <img src="{{ asset($pagoda->photo) }}" 
+                                         alt="{{ $pagoda->name }}" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                @else
+                                    <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
+                                         alt="{{ $pagoda->name }}" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                @endif
+                            </a>
                         </div>
 
-                        {{-- 🌟 စာသားတွေရဲ့ Padding နဲ့ Font Size တွေကို သေးထားပါတယ် --}}
                         <div class="p-4">
-                            <h3 class="text-base font-bold text-gray-900 leading-snug">{{ $pagoda->name }}</h3>
-                            
-                            
-
-                            {{-- စာလုံးရေကိုလည်း ၈၀ ထိ လျှော့ဖြတ်ထားလို့ ကတ်မရှည်တော့ပါဘူး --}}
+                            <h3 class="text-base font-bold text-gray-900 leading-snug">
+                                <a href="{{ route('pagoda.show', $pagoda->id) }}" class="text-gray-900 hover:text-cyan-600 transition decoration-none">
+                                    {{ $pagoda->name }}
+                                </a>
+                            </h3>
                             <p class="mt-2 text-gray-500 text-xs leading-relaxed">
                                 {{ Str::limit($pagoda->history, 80, '...') }}
                             </p>
                         </div>
                     </div>
                     
+                    {{-- 🔗 အသေးစိတ်ဖတ်ရန် ခလုတ် --}}
                     <div class="px-4 pb-4 pt-0">
-                        <a href="#" class="inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
+                        <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
                             အသေးစိတ်ဖတ်ရန် →
                         </a>
                     </div>
@@ -155,6 +206,7 @@
             @endforelse
         </div>
     </section>
+
     {{-- ဆက်သွယ်ရန် ကဏ္ဍ --}}
     <section id="contact" class="bg-gray-50 py-16 scroll-mt-24 border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -170,4 +222,32 @@
             </div>
         </div>
     </section>
+
+    {{-- Pagination AJAX Script --}}
+    <script>
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('.custom-pagination-wrapper a');
+            
+            if (link) {
+                e.preventDefault(); 
+                const url = link.getAttribute('href');
+
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        const newContent = doc.querySelector('#regions-ajax-container');
+                        const oldContent = document.querySelector('#regions-ajax-container');
+
+                        if (newContent && oldContent) {
+                            oldContent.innerHTML = newContent.innerHTML;
+                            document.querySelector('#regions-pagodas').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    })
+                    .catch(error => console.warn('Error fetching pagination:', error));
+            }
+        });
+    </script>
 </x-app-layout>
