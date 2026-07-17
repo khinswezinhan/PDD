@@ -1,7 +1,5 @@
 @extends('components.admin-layout')
 @section('content')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <div class="container py-5" style="max-width: 700px;">
 
         <div class="mb-4">

@@ -157,7 +157,7 @@
                     <label for="history" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         စေတီတော်သမိုင်းအကျဉ်း <span class="text-danger">*</span>
                     </label>
-                    <textarea name="history" id="history" rows="5" required placeholder="စ"
+                    <textarea name="history" id="history" rows="5" required placeholder=""
                         class="form-control rounded-2 @error('history') is-invalid @enderror" style="font-size: 0.95rem;">{{ old('history') }}</textarea>
                     @error('history')
                         <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">

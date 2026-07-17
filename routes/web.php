@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagodaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TownshipController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -61,5 +62,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/pagodas/{pagoda}/edit', [PagodaController::class, 'edit'])->name('admin.pagodas.edit');
     Route::put('/admin/pagodas/{pagoda}', [PagodaController::class, 'update'])->name('admin.pagodas.update');
     Route::get('/admin/get-townships-by-district/{district_id}', [PagodaController::class, 'getTownshipsByDistrict'])->name('admin.get-townships-by-district');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 require __DIR__.'/auth.php';

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Division;   // 💡 တိုးလာသော Model များကိုလည်း တစ်ပါတည်း Import လုပ်ထားပေးပါသည်
+use App\Models\Pagoda;
+use App\Models\Township;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -21,13 +24,30 @@ class AdminDashboardController extends Controller
         $activeDivisionsCount = Division::count();
         $newDivisionsThisMonth = Division::where('created_at', '>=', $startOfMonth)->count();
 
+        // 3. Districts
+        $activeDistrictsCount = District::count();
+        $newDistrictsThisMonth = District::where('created_at', '>=', $startOfMonth)->count();
+
+        // 4. Townships
+        $activeTownshipsCount = Township::count();
+        $newTownshipsThisMonth = Township::where('created_at', '>=', $startOfMonth)->count();
+
+        // 5. Pagodas
+        $activePagodasCount = Pagoda::count();
+        $newPagodasThisMonth = Pagoda::where('created_at', '>=', $startOfMonth)->count();
+
         // 💡 ပြီးမှ view ကို ခေါ်ပြီး compact() ဖြင့် Variable အားလုံးကို ယူဆောင်သွားပါသည်
         return view('admin.dashboard', compact(
             'userCount',
             'newUsersToday',
             'activeDivisionsCount',
             'newDivisionsThisMonth',
-
+            'activeDistrictsCount',
+            'newDistrictsThisMonth',
+            'activeTownshipsCount',
+            'newTownshipsThisMonth',
+            'activePagodasCount',
+            'newPagodasThisMonth'
         ));
     }
 }

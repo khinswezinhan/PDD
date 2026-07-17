@@ -26,6 +26,57 @@
             </a>
         </div>
 
+        {{-- Search & Filter Section --}}
+        <div class="card border border-light-subtle shadow-sm rounded-3 p-3 mb-4 bg-white">
+            <form action="{{ route('admin.divisions.index') }}" method="GET" class="row g-2 align-items-center">
+
+                {{-- Search Input Box --}}
+                <div class="col-12 col-md-4">
+                    <div class="position-relative">
+                        <span
+                            class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted d-flex align-items-center"
+                            style="height: 100%;">
+                            <i class="fa-solid fa-magnifying-glass fs-6"></i>
+                        </span>
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            class="form-control ps-5 border border-secondary-subtle rounded-2"
+                            placeholder="Search by name..." style="height: 38px; font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                {{-- Division Dropdown Filter --}}
+                <div class="col-12 col-md-3">
+                    <select name="division_id" class="form-select border border-secondary-subtle rounded-2"
+                        style="height: 38px; font-size: 0.9rem;">
+                        <option value="">All Divisions</option>
+                        @foreach ($all_divisions as $div)
+                            <option value="{{ $div->id }}" {{ request('division_id') == $div->id ? 'selected' : '' }}>
+                                {{ $div->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Action Buttons --}}
+                <div class="col-12 col-md-auto d-flex gap-2">
+                    <button type="submit"
+                        class="btn btn-secondary px-3 rounded-2 fw-semibold d-inline-flex align-items-center"
+                        style="height: 38px; font-size: 0.9rem;">
+                        Filter
+                    </button>
+
+                    @if (request()->filled('search') || request()->filled('division_id'))
+                        <a href="{{ route('admin.divisions.index') }}"
+                            class="btn btn-light border px-3 rounded-2 fw-semibold d-inline-flex align-items-center text-dark"
+                            style="height: 38px; font-size: 0.9rem;">
+                            Clear
+                        </a>
+                    @endif
+                </div>
+
+            </form>
+        </div>
+
         <div class="card border border-light-subtle shadow-sm rounded-3 overflow-hidden bg-white">
             <div class="table-responsive">
                 <!-- table-sm ကို ဆက်သုံးထားပါတယ် -->

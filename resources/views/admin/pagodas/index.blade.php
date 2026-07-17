@@ -1,7 +1,7 @@
 @extends('components.admin-layout')
 
 @section('content')
-    {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN လှမ်းချိတ်ပေးထားပါတယ် --}}
+    {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <div class="container py-5" style="max-width: 1140px;">
@@ -28,12 +28,73 @@
             </a>
         </div>
 
+        {{-- 🔍 Search & Filter Section အသစ် --}}
+        <div class="card border border-light-subtle shadow-sm rounded-3 p-3 mb-4 bg-white">
+            <form action="{{ route('admin.pagodas.index') }}" method="GET" class="row g-2 align-items-center">
+
+                {{-- Box 1: စေတီပုထိုးအမည် ဖြင့်ရှာရန် --}}
+                <div class="col-12 col-md-3">
+                    <div class="position-relative">
+                        <input type="text" name="search_pagoda" value="{{ request('search_pagoda') }}"
+                            class="form-control ps-5 border border-secondary-subtle rounded-2"
+                            placeholder="စေတီပုထိုးအမည် ဖြင့်ရှာရန်..." style="height: 38px; font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                {{-- Box 2: မြို့နယ်အမည် ဖြင့်ရှာရန် --}}
+                <div class="col-12 col-md-3">
+                    <div class="position-relative">
+                        <span
+                            class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted d-flex align-items-center"
+                            style="height: 100%;">
+                            <i class="fa-solid fa-magnifying-glass fs-6"></i>
+                        </span>
+                        <input type="text" name="search_township" value="{{ request('search_township') }}"
+                            class="form-control ps-5 border border-secondary-subtle rounded-2"
+                            placeholder="မြို့နယ်အမည် ဖြင့်ရှာရန်..." style="height: 38px; font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                {{-- Box 3: တိုင်းဒေသကြီး Filter Dropdown --}}
+                <div class="col-12 col-md-3">
+                    <select name="division_id" class="form-select border border-secondary-subtle rounded-2"
+                        style="height: 38px; font-size: 0.9rem;">
+                        <option value="">တိုင်းဒေသကြီး အားလုံး</option>
+                        @foreach ($divisions as $division)
+                            <option value="{{ $division->id }}"
+                                {{ request('division_id') == $division->id ? 'selected' : '' }}>
+                                {{ $division->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- ခလုတ်များ --}}
+                <div class="col-12 col-md-auto d-flex gap-2">
+                    <button type="submit"
+                        class="btn btn-secondary px-3 rounded-2 fw-semibold d-inline-flex align-items-center"
+                        style="height: 38px; font-size: 0.9rem;">
+                        Filter
+                    </button>
+
+                    @if (request()->filled('search_pagoda') || request()->filled('search_township') || request()->filled('division_id'))
+                        <a href="{{ route('admin.pagodas.index') }}"
+                            class="btn btn-light border px-3 rounded-2 fw-semibold d-inline-flex align-items-center text-dark"
+                            style="height: 38px; font-size: 0.9rem;">
+                            Clear
+                        </a>
+                    @endif
+                </div>
+
+            </form>
+        </div>
+
+        {{-- Data Table Section --}}
         <div class="card border border-light-subtle shadow-sm rounded-3 overflow-hidden bg-white">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-light border-bottom border-secondary-subtle">
-                        <tr class="text-secondary small text-uppercase fw-bold"
-                            style="font-size: 0.85rem; letter-spacing: 0.5px;">
+                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">
                             <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">စဥ်</th>
                             <th scope="col" class="py-3 ps-3">စေတီပုထိုးအမည်</th>
                             <th scope="col" class="py-3 ps-3">တိုင်းဒေသကြီး</th>
@@ -49,35 +110,34 @@
                     <tbody>
                         @forelse ($pagodas as $key => $pagoda)
                             <tr class="border-bottom border-light">
-                                <td class="ps-4 py-3 text-center fw-semibold text-muted" style="font-size: 0.9rem;">
+                                <td class="ps-4 py-3 text-center fw-bold text-muted" style="font-size: 0.9rem;">
                                     {{ ($pagodas->currentPage() - 1) * $pagodas->perPage() + $key + 1 }}
                                 </td>
 
                                 <td class="ps-3 py-3">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 1rem;">
+                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.9rem;">
                                         {{ $pagoda->name }}
                                     </span>
                                 </td>
 
                                 <td class="ps-3 py-3">
-                                    <span class="text-secondary" style="font-size: 0.95rem;">
+                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.9rem;">
                                         {{ $pagoda->township->district->division->name ?? 'N/A' }}
                                     </span>
                                 </td>
 
                                 <td class="ps-3 py-3">
-                                    <span class="text-secondary" style="font-size: 0.95rem;">
+                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.9rem;">
                                         {{ $pagoda->township->district->name ?? 'N/A' }}
                                     </span>
                                 </td>
 
                                 <td class="ps-3 py-3">
-                                    <span class="text-secondary" style="font-size: 0.95rem;">
+                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.9rem;">
                                         {{ $pagoda->township->name ?? 'N/A' }}
                                     </span>
                                 </td>
 
-                                {{-- 🌟 (၁) ပုံအစစ်ပေါ်လာအောင် img tag ဖြင့် ပြင်ဆင်ခြင်း --}}
                                 <td class="ps-3 py-3">
                                     @if ($pagoda->photo)
                                         <img src="{{ asset($pagoda->photo) }}" alt="{{ $pagoda->name }}"
@@ -101,14 +161,13 @@
                                 </td>
 
                                 <td class="ps-3 py-3">
-                                    <span class="text-secondary small" title="{{ $pagoda->address }}">
+                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.9rem;">
                                         {{ Str::limit($pagoda->address, 30, '...') }}
                                     </span>
                                 </td>
 
-                                {{-- 🌟 (၂) သမိုင်းစာသားအရှည်ကြီးကို "...." ဖြင့် ဖြတ်ပြခြင်း --}}
                                 <td class="ps-3 py-3">
-                                    <span class="text-muted small" title="{{ $pagoda->history }}">
+                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.9rem;">
                                         {{ Str::limit($pagoda->history, 50, '...') }}
                                     </span>
                                 </td>
@@ -119,23 +178,11 @@
                                             class="btn btn-sm btn-outline-primary px-2 rounded-2 d-inline-flex align-items-center fw-medium">
                                             <i class="fas fa-edit me-1 small"></i> ပြင်ဆင်ရန်
                                         </a>
-
-                                        {{-- <form action="{{ route('admin.pagodas.destroy', $pagoda->id) }}" method="POST"
-                                            class="d-inline"
-                                            onsubmit="return confirm('ဤဗုဒ္ဓစေတီတော်ကို ဖျက်ရန် သေချာပါသလား?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="btn btn-sm btn-outline-danger px-2 rounded-2 d-inline-flex align-items-center fw-medium">
-                                                <i class="fas fa-trash-alt me-1 small"></i> Delete
-                                            </button>
-                                        </form> --}}
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                {{-- Column အားလုံးပေါင်း ၁၀ ခု ရှိသွား၍ colspan="10" သို့ ညှိလိုက်ပါသည် --}}
                                 <td colspan="10" class="text-center py-5 text-muted">
                                     <i class="fas fa-folder-open fa-2x mb-3 text-black-50 d-block"></i>
                                     <span>ဒေတာမရှိသေးပါ။ <strong>စေတီပုထိုးအသစ်ထည့်ရန်</strong> ခလုတ်မှတစ်ဆင့်
@@ -155,7 +202,7 @@
                         entries
                     </div>
                     <div>
-                        {{ $pagodas->links() }}
+                        {{ $pagodas->appends(request()->query())->links() }}
                     </div>
                 </div>
             @endif

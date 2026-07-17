@@ -15,12 +15,29 @@ class DivisionController extends Controller
     //     return view('home', compact('divisions'));
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        // ပြင်ဆင်လိုက်သည့်နေရာ - data ဆွဲပြီး view ဆီ compact ဖြင့် ပို့ပေးထားသည်
-        $divisions = Division::paginate(4);
+        // Query စတင်တည်ဆောက်မယ်
+        $query = Division::query();
 
-        return view('admin.divisions.index', compact('divisions'));
+        // ၁။ ရှာဖွေရေး box ထဲမှာ စာရိုက်ရှာထားရင် (ဥပမာ - ရန်ကုန်၊ မန္တလေး)
+        if ($request->has('search') && ! empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where('name', 'LIKE', '%'.$searchTerm.'%');
+        }
+
+        // ၂။ တကယ်လို့ Division ID အလိုက် Filter လုပ်ချင်ရင် (Dropdown အတွက်)
+        if ($request->filled('division_id')) {
+            $query->where('id', $request->division_id);
+        }
+
+        // စာမျက်နှာအလိုက် Pagination တွက်ပြီး URL parameters တွေပါ တွဲသယ်သွားမယ်
+        $divisions = $query->paginate(4)->appends($request->query());
+
+        // Dropdown ထဲမှာ ပြန်ပြဖို့အတွက် Divisions အားလုံးကို ဆွဲထုတ်မယ်
+        $all_divisions = Division::all();
+
+        return view('admin.divisions.index', compact('divisions', 'all_divisions'));
     }
 
     public function create()

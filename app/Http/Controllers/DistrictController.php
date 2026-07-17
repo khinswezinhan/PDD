@@ -11,12 +11,29 @@ class DistrictController extends Controller
     /**
      * 🌟 Admin Panel က တိုင်းဒေသကြီး List ပြခန်းအတွက် (Function အသစ်ခွဲလိုက်ပါသည်)
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Admin ဘက်မှာ စာမျက်နှာအလိုက် ၄ ခုစီ ခွဲပြမယ်
-        $districts = District::paginate(4);
+        // ခရိုင်နဲ့ တိုင်းဒေသကြီး တွဲလျက်ဆွဲထုတ်မယ်
+        $query = District::with('division');
 
-        return view('admin.districts.index', compact('districts'));
+        // ၁။ ခရိုင်အမည် ရိုက်ရှာထားတာရှိရင်
+        if ($request->has('search') && ! empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where('name', 'LIKE', '%'.$searchTerm.'%');
+        }
+
+        // ၂။ Dropdown ကနေ တိုင်း/ပြည်နယ်အလိုက် Filter လုပ်ထားရင်
+        if ($request->filled('division_id')) {
+            $query->where('division_id', $request->division_id);
+        }
+
+        // URL parameter တွေပါသယ်ပြီး စာမျက်နှာခွဲထုတ်မယ်
+        $districts = $query->paginate(10)->appends($request->query());
+
+        // Dropdown ထဲမှာပြဖို့ တိုင်း/ပြည်နယ် အားလုံးကိုဆွဲထုတ်မယ်
+        $divisions = Division::all();
+
+        return view('admin.districts.index', compact('districts', 'divisions'));
     }
 
     public function create()

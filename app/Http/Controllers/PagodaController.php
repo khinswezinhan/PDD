@@ -10,12 +10,39 @@ use Illuminate\Http\Request;
 
 class PagodaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // ဘုရားစေတီပုထိုးများ စာရင်းအား ID အလိုက် (Ascending) စီပြီး Pagination ၄ ခုစီဖြင့် ပြသပါမည်
-        $pagodas = Pagoda::orderBy('id', 'asc')->paginate(4);
+        // Relationship တွေကို ကြိုဆွဲတင်ထားမယ်
+        $query = Pagoda::with(['township.district.division']);
 
-        return view('admin.pagodas.index', compact('pagodas'));
+        // ၁။ စေတီပုထိုးအမည် ဖြင့် ရှေ့ရောနောက်ရော ရှာဖွေခြင်း
+        if ($request->filled('search_pagoda')) {
+            $query->where('name', 'LIKE', '%'.trim($request->search_pagoda).'%');
+        }
+
+        // ၂။ မြို့နယ်အမည် ဖြင့် ရှာဖွေခြင်း (ကြားခံ township model ထဲဝင်စစ်ပါတယ်)
+        if ($request->filled('search_township')) {
+            $searchTownship = trim($request->search_township);
+            $query->whereHas('township', function ($q) use ($searchTownship) {
+                $q->where('name', 'LIKE', '%'.$searchTownship.'%');
+            });
+        }
+
+        // ၃။ တိုင်းဒေသကြီး Dropdown ဖြင့် စစ်ထုတ်ခြင်း (ကြားခံ ၃ ဆင့် ဖြတ်စစ်ပါတယ်)
+        if ($request->filled('division_id')) {
+            $divisionId = $request->division_id;
+            $query->whereHas('township.district.division', function ($q) use ($divisionId) {
+                $q->where('id', $divisionId);
+            });
+        }
+
+        // စာမျက်နှာခွဲခြင်း (Pagination) နဲ့ တန်ဖိုးတွေ URL မှာ ကပ်ပါသွားအောင် လုပ်ခြင်း
+        $pagodas = $query->paginate(10)->appends($request->query());
+
+        // Dropdown ထဲပြဖို့ Division List ကို ဆွဲထုတ်ခြင်း
+        $divisions = Division::all(); // သင့် Division Model path အတိုင်း ပြင်ပေးပါ
+
+        return view('admin.pagodas.index', compact('pagodas', 'divisions'));
     }
 
     public function create()
