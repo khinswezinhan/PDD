@@ -35,6 +35,11 @@
                 {{-- Box 1: စေတီပုထိုးအမည် ဖြင့်ရှာရန် --}}
                 <div class="col-12 col-md-3">
                     <div class="position-relative">
+                        <span
+                            class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted d-flex align-items-center"
+                            style="height: 100%;">
+                            <i class="fa-solid fa-magnifying-glass fs-6"></i>
+                        </span>
                         <input type="text" name="search_pagoda" value="{{ request('search_pagoda') }}"
                             class="form-control ps-5 border border-secondary-subtle rounded-2"
                             placeholder="စေတီပုထိုးအမည် ဖြင့်ရှာရန်..." style="height: 38px; font-size: 0.9rem;">

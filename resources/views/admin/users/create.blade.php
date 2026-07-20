@@ -75,22 +75,27 @@
                         style="font-size: 0.95rem;">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>Status:</label><br>
 
-                    <input type="radio" name="status" value="active" id="active"
-                        {{ old('status') == 'active' ? 'checked' : '' }}>
-                    <label for="active">Active</label>
+                    <div style="display: flex; gap: 24px; align-items: center; margin-top: 8px;">
+                        <label for="active" style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="radio" name="status" value="active" id="active"
+                                {{ old('status', 'active') == 'active' ? 'checked' : '' }}>
+                            Active
+                        </label>
 
-                    <input type="radio" name="status" value="inactive" id="inactive"
-                        {{ old('status') == 'inactive' ? 'checked' : '' }}>
-                    <label for="inactive">Inactive</label>
+                        <label for="inactive" style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="radio" name="status" value="inactive" id="inactive"
+                                {{ old('status') == 'inactive' ? 'checked' : '' }}>
+                            Inactive
+                        </label>
+                    </div>
 
                     @error('status')
-                        <span class="text-danger">{{ $message }}</span>
+                        <span class="text-danger" style="color: red; font-size: 13px;">{{ $message }}</span>
                     @enderror
                 </div>
-
                 {{-- Form Action Buttons --}}
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-4">
                     <a href="{{ route('admin.users.index') }}"

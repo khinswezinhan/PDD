@@ -32,7 +32,7 @@ class DivisionController extends Controller
         }
 
         // စာမျက်နှာအလိုက် Pagination တွက်ပြီး URL parameters တွေပါ တွဲသယ်သွားမယ်
-        $divisions = $query->paginate(4)->appends($request->query());
+        $divisions = $query->paginate(5)->appends($request->query());
 
         // Dropdown ထဲမှာ ပြန်ပြဖို့အတွက် Divisions အားလုံးကို ဆွဲထုတ်မယ်
         $all_divisions = Division::all();
