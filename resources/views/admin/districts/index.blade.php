@@ -43,7 +43,7 @@
                         </span>
                         <input type="text" name="search" value="{{ request('search') }}"
                             class="form-control ps-5 border border-secondary-subtle rounded-2"
-                            placeholder="Search by name..." style="height: 38px; font-size: 0.9rem;">
+                            placeholder="ခရိုင်အမည်ြဖင့်ရှာရန်" style="height: 38px; font-size: 0.9rem;">
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                 <div class="col-12 col-md-3">
                     <select name="division_id" class="form-select border border-secondary-subtle rounded-2"
                         style="height: 38px; font-size: 0.9rem;">
-                        <option value="">All Divisions</option>
+                        <option value="">တိုင်းဒေသကြီး/ပြည်နယ်အားလုံး</option>
                         @foreach ($divisions as $division)
                             <option value="{{ $division->id }}"
                                 {{ request('division_id') == $division->id ? 'selected' : '' }}>
