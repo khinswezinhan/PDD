@@ -89,27 +89,53 @@
 
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                         @forelse ($users as $index => $user)
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100 whitespace-nowrap">
+                            {{-- Status inactive ဖြစ်ရင် Text အရောင်တွေကို မှိန်ပေးမည် --}}
+                            <tr
+                                class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition {{ $user->status !== 'active' ? 'text-gray-400 dark:text-gray-500' : '' }}">
+
+                                {{-- No --}}
+                                <td
+                                    class="px-6 py-4 text-sm {{ $user->status !== 'active' ? 'text-gray-400' : 'text-gray-900 dark:text-gray-100' }} whitespace-nowrap">
                                     {{ $users->firstItem() + $index }}
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-950 dark:text-white font-medium whitespace-nowrap">
+
+                                {{-- Name --}}
+                                <td
+                                    class="px-6 py-4 text-sm font-medium {{ $user->status !== 'active' ? 'text-gray-400' : 'text-gray-950 dark:text-white' }} whitespace-nowrap">
                                     {{ $user->name }}
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-950 dark:text-white font-medium whitespace-nowrap">
+
+                                {{-- Role --}}
+                                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
                                     <span
-                                        class="px-2.5 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                                        class="px-2.5 py-1 text-xs font-semibold rounded-full {{ $user->status !== 'active' ? 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500' : 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' }}">
                                         {{ $user->role?->role_name ?? 'No Role' }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+
+                                {{-- Email --}}
+                                <td
+                                    class="px-6 py-4 text-sm {{ $user->status !== 'active' ? 'text-gray-400' : 'text-gray-500 dark:text-gray-400' }} whitespace-nowrap">
                                     {{ $user->email }}
                                 </td>
+
+                                {{-- Action Buttons --}}
                                 <td class="px-6 py-4 text-sm text-right space-x-3 whitespace-nowrap">
-                                    <a href="{{ route('admin.users.edit', $user) }}"
-                                        class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 font-medium inline-block">
-                                        <i class="fa-solid fa-pen-to-square text-base"></i>
-                                    </a>
+
+                                    {{-- Edit Button (Active မဟုတ်ရင် မှိန်သွားမည်၊ နှိပ်လို့မရပါ) --}}
+                                    @if ($user->status === 'active')
+                                        <a href="{{ route('admin.users.edit', $user) }}"
+                                            class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 font-medium inline-block">
+                                            <i class="fa-solid fa-pen-to-square text-base"></i>
+                                        </a>
+                                    @else
+                                        <span class="text-gray-300 dark:text-gray-600 cursor-not-allowed inline-block"
+                                            title="User is inactive (Cannot Edit)">
+                                            <i class="fa-solid fa-pen-to-square text-base"></i>
+                                        </span>
+                                    @endif
+
+                                    {{-- Delete Button (အမြဲတမ်း ပုံမှန်လင်းပြီး အလုပ်လုပ်မည်) --}}
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
                                         class="inline-block">
                                         @csrf
@@ -120,6 +146,7 @@
                                             <i class="fa-solid fa-trash text-base"></i>
                                         </button>
                                     </form>
+
                                 </td>
                             </tr>
                         @empty
@@ -129,7 +156,7 @@
                                     No users found matching the criteria.
                                 </td>
                             </tr>
-                        @endforelse {{-- ဤနေရာတွင် @endforelse ဖြင့် မှန်ကန်စွာ ပိတ်ပေးထားပြီးဖြစ်ပါတယ် --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>

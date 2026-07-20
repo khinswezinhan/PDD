@@ -35,7 +35,7 @@ class TownshipController extends Controller
             });
         }
 
-        $townships = $query->paginate(4)->appends($request->query());
+        $townships = $query->paginate(10)->appends($request->query());
         $divisions = Division::all();
 
         return view('admin.townships.index', compact('townships', 'divisions'));

@@ -40,7 +40,7 @@
                         </span>
                         <input type="text" name="search" value="{{ request('search') }}"
                             class="form-control ps-5 border border-secondary-subtle rounded-2"
-                            placeholder="တိုင်းဒေသကြီး/ပြည်နယ်အမည်ြဖင့်ရှာရန်" style="height: 38px; font-size: 0.9rem;">
+                            placeholder="တိုင်းဒေသကြီး/ပြည်နယ်အမည်ဖြင့်ရှာရန်" style="height: 38px; font-size: 0.9rem;">
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                             <th scope="col" class="ps-4 py-2 text-center" style="width: 80px;">စဥ်</th>
                             <th scope="col" class="py-2 ps-3">တိုင်းဒေသကြီး/ပြည်နယ်</th>
                             <th scope="col" class="py-2 ps-3">ဓာတ်ပုံ</th>
-                            <th scope="col" class="py-2 text-end pe-4" style="width: 240px;">ြပင်ဆင်ရန်</th>
+                            <th scope="col" class="py-2 text-end pe-4" style="width: 240px;">ပြင်ဆင်ရန်</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,9 +103,10 @@
                                     </span>
                                 </td>
                                 <td class="ps-3 py-2">
-                                    @if ($division->photo)
-                                        <!-- ပုံကို ပိုကျစ်လစ်စေရန် width/height 40px သို့ လျှော့ချထားပါသည် -->
-                                        <img src="{{ url($division->photo) }}" alt="" class="img-thumbnail"
+                                    @if (!empty($division->photo))
+                                        <!-- url() အစား asset() ပြောင်းသုံးထားပြီး Path ရှေ့မှာ '/' ခံထားပါတယ် -->
+                                        <img src="{{ asset('/' . $division->photo) }}" alt="{{ $division->name }}"
+                                            class="img-thumbnail"
                                             style="width: 40px; height: 40px; object-fit: cover; display: block;">
                                     @else
                                         <span class="text-muted" style="font-size: 0.8rem;">ဓာတ်ပုံမရှိပါ</span>
