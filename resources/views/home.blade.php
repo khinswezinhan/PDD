@@ -3,7 +3,7 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Pagination နှင့် အောက်က "ထင်ရှားသော ဘုရားများ" ခေါင်းစဉ် မဝေးတော့ဘဲ ကွက်တိဖြစ်စေမည့် Style */
+        /* Pagination နှင့် ခေါင်းစဉ်များ ကွက်တိဖြစ်စေမည့် Style */
         .custom-pagination-wrapper {
             margin-top: 2rem !important;
             padding-top: 1rem !important;
@@ -15,17 +15,57 @@
         .custom-pagination-wrapper nav svg {
             display: inline-block;
         }
+        
+        /* Pagination Links နှင့် Buttons များအတွက် ပုံမှန်အရောင် (Background နဲ့ Text ပါ ဖြည့်ပေးထားသည်) */
+        .custom-pagination-wrapper nav a,
+        .custom-pagination-wrapper nav button,
+        .custom-pagination-wrapper nav span:not([aria-current="page"]):not([aria-disabled="true"]) span,
+        .famous-pagination-wrapper nav a,
+        .famous-pagination-wrapper nav button,
+        .famous-pagination-wrapper nav span:not([aria-current="page"]):not([aria-disabled="true"]) span {
+            color: #1f2937 !important;           /* စာသားအရောင် အမည်းရောင် */
+            background-color: #ffffff !important;  /* နောက်ခံ အဖြူရောင် */
+            border-color: #d1d5db !important;      /* ဘောင် မီးခိုးရောင် */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Regions Active Page (Orange) */
         .custom-pagination-wrapper nav span[aria-current="page"] span,
         .custom-pagination-wrapper nav span[aria-current="page"] button {
             background-color: #f97316 !important;
             border-color: #f97316 !important;
             color: white !important;
         }
-        .custom-pagination-wrapper nav a:hover {
-            color: #ea580c !important;
-        }
+        .custom-pagination-wrapper nav a:hover,
         .custom-pagination-wrapper nav button:hover {
+            background-color: #fff7ed !important;
             color: #ea580c !important;
+            border-color: #fdba74 !important;
+        }
+
+        /* Famous Pagodas Active Page (Cyan) */
+        .famous-pagination-wrapper nav span[aria-current="page"] span,
+        .famous-pagination-wrapper nav span[aria-current="page"] button {
+            background-color: #0891b2 !important;
+            border-color: #0891b2 !important;
+            color: white !important;
+        }
+        .famous-pagination-wrapper nav a:hover,
+        .famous-pagination-wrapper nav button:hover {
+            background-color: #ecfeff !important;
+            color: #0e7490 !important;
+            border-color: #7dd3fc !important;
+        }
+
+        /* မနှိပ်နိုင်သေးသော Disabled ခလုတ်များ (Previous / Next) အတွက် အရောင် */
+        .custom-pagination-wrapper nav span[aria-disabled="true"] span,
+        .famous-pagination-wrapper nav span[aria-disabled="true"] span,
+        .custom-pagination-wrapper nav span[aria-disabled="true"] button,
+        .famous-pagination-wrapper nav span[aria-disabled="true"] button {
+            color: #9ca3af !important;
+            background-color: #f9fafb !important;
+            border-color: #e5e7eb !important;
+            opacity: 1 !important;
         }
     </style>
 
@@ -40,7 +80,7 @@
                 ],
                 next() { this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1 },
                 prev() { this.activeSlide = this.activeSlide === 1 ? this.slides.length : this.activeSlide - 1 }
-             }" 
+               }" 
              x-init="setInterval(() => next(), 5000)" 
              class="relative bg-gray-950 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden shadow-sm w-full">
 
@@ -101,7 +141,7 @@
             <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
         </div>
 
-        {{-- AJAX နဲ့ Update လုပ်မည့် container --}}
+        {{-- AJAX Container for Regions --}}
         <div id="regions-ajax-container">
             <div class="px-6 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                @forelse($divisions as $division)
@@ -147,7 +187,7 @@
                 @endforelse
             </div>
 
-            {{-- Pagination --}}
+            {{-- Regions Pagination --}}
             <div class="px-6 sm:px-8 custom-pagination-wrapper">
                 {{ $divisions->links() }}
             </div>
@@ -157,53 +197,63 @@
     {{-- ထင်ရှားသော ဘုရားများ ကဏ္ဍ --}}
     <section id="famous-pagodas" class="max-w-7xl mx-auto pt-6 pb-16 scroll-mt-24 border-t border-gray-100">
         <div class="text-center mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">တန်ခိုးကြီးဘုရားများ</h2>
+            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">
+                <a href="{{ url('/#famous-pagodas') }}" class="text-gray-900 hover:text-orange-500 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
+                    တန်ခိုးကြီးဘုရားများ
+                </a>
+            </h2>
             <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံတစ်ဝန်းရှိ တန်ခိုးကြီး ထင်ရှားသော စေတီပုထိုးများ</p>
         </div>
 
-        <div class="px-6 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            @forelse($famousPagodas as $pagoda)
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
-                    <div>
-                        {{-- 📸 ဘုရားပုံရိပ် (ပုံကို နှိပ်လျှင်လည်း Detail Page သို့ သွားရန် Link ပတ်ပေးထားပြီး Hover Zoom ထည့်ထားသည်) --}}
-                        <div class="h-40 bg-gray-200 relative overflow-hidden">
-                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="block w-full h-full">
-                                @if($pagoda->photo)
-                                    <img src="{{ asset($pagoda->photo) }}" 
-                                         alt="{{ $pagoda->name }}" 
-                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                                @else
-                                    <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
-                                         alt="{{ $pagoda->name }}" 
-                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                                @endif
+        {{-- AJAX Container for Famous Pagodas --}}
+        <div id="famous-ajax-container">
+            <div class="px-6 sm:px-8 grid grid-cols-1 sm:px-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                @forelse($famousPagodas as $pagoda)
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
+                        <div>
+                            <div class="h-40 bg-gray-200 relative overflow-hidden">
+                                <a href="{{ route('pagoda.show', $pagoda->id) }}" class="block w-full h-full">
+                                    @if($pagoda->photo)
+                                        <img src="{{ asset($pagoda->photo) }}" 
+                                             alt="{{ $pagoda->name }}" 
+                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    @else
+                                        <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
+                                             alt="{{ $pagoda->name }}" 
+                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    @endif
+                                </a>
+                            </div>
+
+                            <div class="p-4">
+                                <h3 class="text-base font-bold text-gray-900 leading-snug">
+                                    <a href="{{ route('pagoda.show', $pagoda->id) }}" class="text-gray-900 hover:text-cyan-600 transition decoration-none">
+                                        {{ $pagoda->name }}
+                                    </a>
+                                </h3>
+                                <p class="mt-2 text-gray-500 text-xs leading-relaxed">
+                                    {{ Str::limit($pagoda->history, 80, '...') }}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="px-4 pb-4 pt-0">
+                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
+                                အသေးစိတ်ဖတ်ရန် →
                             </a>
                         </div>
+                    </div>
+                @empty
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12 text-gray-400 text-sm">
+                        ထင်ရှားသော စေတီပုထိုးများ ဒေတာ မရှိသေးပါ။
+                    </div>
+                @endforelse
+            </div>
 
-                        <div class="p-4">
-                            <h3 class="text-base font-bold text-gray-900 leading-snug">
-                                <a href="{{ route('pagoda.show', $pagoda->id) }}" class="text-gray-900 hover:text-cyan-600 transition decoration-none">
-                                    {{ $pagoda->name }}
-                                </a>
-                            </h3>
-                            <p class="mt-2 text-gray-500 text-xs leading-relaxed">
-                                {{ Str::limit($pagoda->history, 80, '...') }}
-                            </p>
-                        </div>
-                    </div>
-                    
-                    {{-- 🔗 အသေးစိတ်ဖတ်ရန် ခလုတ် --}}
-                    <div class="px-4 pb-4 pt-0">
-                        <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
-                            အသေးစိတ်ဖတ်ရန် →
-                        </a>
-                    </div>
-                </div>
-            @empty
-                <div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12 text-gray-400 text-sm">
-                    ထင်ရှားသော စေတီပုထိုးများ ဒေတာ မရှိသေးပါ။
-                </div>
-            @endforelse
+            {{-- Famous Pagodas Pagination --}}
+            <div class="px-6 sm:px-8 custom-pagination-wrapper famous-pagination-wrapper">
+                {{ $famousPagodas->links() }}
+            </div>
         </div>
     </section>
 
@@ -223,7 +273,7 @@
         </div>
     </section>
 
-    {{-- Pagination AJAX Script --}}
+    {{-- AJAX Script for Pagination (Both Sections) --}}
     <script>
         document.addEventListener('click', function (e) {
             const link = e.target.closest('.custom-pagination-wrapper a');
@@ -231,6 +281,7 @@
             if (link) {
                 e.preventDefault(); 
                 const url = link.getAttribute('href');
+                const isFamous = link.closest('#famous-ajax-container') !== null;
 
                 fetch(url)
                     .then(response => response.text())
@@ -238,12 +289,22 @@
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
                         
-                        const newContent = doc.querySelector('#regions-ajax-container');
-                        const oldContent = document.querySelector('#regions-ajax-container');
+                        if (isFamous) {
+                            const newContent = doc.querySelector('#famous-ajax-container');
+                            const oldContent = document.querySelector('#famous-ajax-container');
 
-                        if (newContent && oldContent) {
-                            oldContent.innerHTML = newContent.innerHTML;
-                            document.querySelector('#regions-pagodas').scrollIntoView({ behavior: 'smooth' });
+                            if (newContent && oldContent) {
+                                oldContent.innerHTML = newContent.innerHTML;
+                                document.querySelector('#famous-pagodas').scrollIntoView({ behavior: 'smooth' });
+                            }
+                        } else {
+                            const newContent = doc.querySelector('#regions-ajax-container');
+                            const oldContent = document.querySelector('#regions-ajax-container');
+
+                            if (newContent && oldContent) {
+                                oldContent.innerHTML = newContent.innerHTML;
+                                document.querySelector('#regions-pagodas').scrollIntoView({ behavior: 'smooth' });
+                            }
                         }
                     })
                     .catch(error => console.warn('Error fetching pagination:', error));

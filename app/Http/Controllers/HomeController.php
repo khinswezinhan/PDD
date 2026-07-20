@@ -13,11 +13,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $divisions = Division::paginate(4);
+        $divisions = Division::paginate(4, ['*'], 'division_page');
 
         $famousPagodas = Pagoda::with('township.district.division')
-                            ->where('status', 'famous')
-                            ->get();
+                    ->where('status', 'famous')
+                    ->paginate(4, ['*'], 'famous_page');
 
         return view('home', compact('divisions', 'famousPagodas'));
     }
@@ -37,16 +37,11 @@ class HomeController extends Controller
     }
 
     /**
-     * 🌟 ဤနေရာတွင် အသစ်တိုးလိုက်ပါသည်
      * ဘုရားတစ်ဆူချင်းစီ၏ အသေးစိတ် (Detail) ကို ပြသရန် Function
      */
     public function showPagoda($id)
     {
-        // ၁။ URL က ပါလာတဲ့ ဘုရား ID ကို Database ထဲမှာ ရှာဖွေသည်
-        // (Relationship ပါးစပ် ချိတ်ဆက်ပြီးသား ပါအောင် township အထိပါ ဆွဲတင်ထားပါမယ်)
         $pagoda = Pagoda::with('township.district.division')->findOrFail($id);
-
-        // ၂။ ရှာတွေ့တဲ့ ဘုရား data ကို pagoda-detail (သို့မဟုတ် အစ်ကို့ရဲ့ detail ဖိုင်အမည်) ဆီသို့ ပို့ပေးခြင်း
         return view('pagodaDetail', compact('pagoda'));
     }
 }
