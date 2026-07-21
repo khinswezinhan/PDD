@@ -9,16 +9,7 @@
     <div class="min-h-screen bg-gray-50 pt-36 sm:pt-40 pb-12 sm:pb-16">
         <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
 
-            {{-- 🔙 နောက်သို့ပြန်သွားရန် ခလုတ် --}}
-            <div class="mb-6">
-                <a href="{{ url()->previous() == url()->current() ? url('/') : url()->previous() }}"
-                    class="inline-flex items-center gap-2 text-sm font-bold text-gray-700 hover:text-orange-600 bg-white hover:bg-gray-100 px-4 py-2 rounded-lg shadow-sm border border-gray-200 transition duration-150 decoration-none">
-                    <svg class="w-4 h-4 stroke-[3] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    နောက်သို့ ပြန်သွားရန်
-                </a>
-            </div>
+            
 
             {{-- 🏛️ Main Content Container --}}
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">

@@ -5,20 +5,12 @@
 
     {{-- 🌟 Navigation Bar အမြင့်ကြီးနှင့် လွတ်စေရန် pt-36 sm:pt-40 သို့ ထပ်မံတိုးမြှင့်လိုက်သည် --}}
     <div class="min-h-screen bg-gray-50 pt-36 sm:pt-40 pb-12 sm:pb-16">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div class="max-w-7xl mx-auto px-3 sm:px-8 lg:px-12">
             
-            {{-- 🔙 ပင်မစာမျက်နှာသို့ ပြန်သွားရန် ခလုတ် --}}
-            <div class="mb-6">
-                <a href="{{ url('/') }}" 
-                   class="inline-flex items-center gap-2 text-sm font-bold text-gray-700 hover:text-orange-600 bg-white hover:bg-gray-100 px-4 py-2 rounded-lg shadow-sm border border-gray-200 transition duration-150 decoration-none">
-                    <svg class="w-4 h-4 stroke-[3] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    ပင်မစာမျက်နှာသို့ ပြန်သွားရန်
-                </a>
-            </div>
+           
+            
 
-            {{-- 🏷️ တိုင်းဒေသကြီး ခေါင်းစဉ်ပိုင်း --}}
+            
             <div class="border-b border-gray-200 pb-8 mb-10 flex flex-col items-center justify-center text-center gap-4">
                 <div class="space-y-3">
                     <h1 class="text-3xl sm:text-4xl font-black text-gray-950 tracking-tight leading-tight">
