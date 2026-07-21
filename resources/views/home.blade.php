@@ -158,14 +158,10 @@
                         <div>
                             <a href="{{ route('division.show', $division->id) }}"
                                 class="block h-40 bg-gray-100 relative overflow-hidden">
-                                @if ($division->image)
-                                    <img src="{{ asset('storage/' . $division->image) }}" alt="{{ $division->name }}"
+                                 
+                                    <img src="{{ asset($division->photo) }}" alt="{{ $division->photo }}"
                                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                                @else
-                                    <img src="https://placehold.co/600x400/f3f4f6/ea580c?text=Pagoda"
-                                        alt="{{ $division->name }}"
-                                        class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                                @endif
+                        
                             </a>
 
                             <div class="p-4">

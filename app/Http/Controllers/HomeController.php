@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Division;
 use App\Models\Pagoda;
+use App\Models\Township;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $divisions = Division::paginate(4, ['*'], 'division_page');
-
+        
         $famousPagodas = Pagoda::with('township.district.division')
                     ->where('status', 'famous')
                     ->paginate(4, ['*'], 'famous_page');
@@ -25,21 +27,26 @@ class HomeController extends Controller
     /**
      * တိုင်းဒေသကြီးအလိုက် ဘုရားများပြသခြင်း
      */
-    public function showDivision($id)
+    public function showDivision(int $id)
     {
         $division = Division::findOrFail($id);
-
-        $pagodas = Pagoda::whereHas('township.district.division', function ($query) use ($id) {
-            $query->where('id', $id);
-        })->get();
-
-        return view('divisionState', compact('division', 'pagodas'));
+        if($division)
+        {
+            $pagodas = Pagoda::whereHas('township.district', function($q)  use($id) {
+                $q->where('division_id', $id);
+            })->get(); 
+        }
+       $data =[
+        'division'=>$division,
+        'pagodas'=> $pagodas
+       ];
+        return view('divisionState', $data);
     }
 
     /**
      * ဘုရားတစ်ဆူချင်းစီ၏ အသေးစိတ် (Detail) ကို ပြသရန် Function
      */
-    public function showPagoda($id)
+    public function showPagoda(int $id)
     {
         $pagoda = Pagoda::with('township.district.division')->findOrFail($id);
         return view('pagodaDetail', compact('pagoda'));

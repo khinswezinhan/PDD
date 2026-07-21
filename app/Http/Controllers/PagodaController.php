@@ -41,7 +41,7 @@ class PagodaController extends Controller
 
         // Dropdown ထဲပြဖို့ Division List ကို ဆွဲထုတ်ခြင်း
         $divisions = Division::all(); // သင့် Division Model path အတိုင်း ပြင်ပေးပါ
-
+        
         return view('admin.pagodas.index', compact('pagodas', 'divisions'));
     }
 

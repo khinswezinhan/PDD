@@ -19,15 +19,19 @@ class Township extends Model
         return $this->belongsTo(District::class);
     }
 
-    public function division()
+    // public function division()
+    // {
+    //     return $this->hasOneThrough(
+    //         Division::class, // Target model
+    //         District::class, // Intermediate (ကြားခံ) model
+    //         'id',            // District table ရဲ့ local key
+    //         'id',            // Division table ရဲ့ local key
+    //         'district_id',   // Township table ရဲ့ foreign key
+    //         'division_id'    // District table ရဲ့ foreign key
+    //     );
+    // }
+    public function pagodas()
     {
-        return $this->hasOneThrough(
-            Division::class, // Target model
-            District::class, // Intermediate (ကြားခံ) model
-            'id',            // District table ရဲ့ local key
-            'id',            // Division table ရဲ့ local key
-            'district_id',   // Township table ရဲ့ foreign key
-            'division_id'    // District table ရဲ့ foreign key
-        );
+        return $this->hasMany(Pagoda::class);
     }
 }
