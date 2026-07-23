@@ -61,7 +61,7 @@
                 <div class="col-12 col-md-auto d-flex gap-2">
                     <button type="submit"
                         style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
-                        Filter
+                        ရှာရန်
                     </button>
 
                     @if (request()->filled('search') || request()->filled('division_id'))
@@ -80,13 +80,12 @@
             <div class="table-responsive">
                 <!-- table-sm ကို ဆက်သုံးထားပါတယ် -->
                 <table class="table table-hover table-sm align-middle mb-0">
-                    <thead class="bg-light border-bottom border-secondary-subtle">
-                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">
-                            <!-- py-3 မှ py-2 သို့ ပြောင်းလဲထားပါသည် -->
-                            <th scope="col" class="ps-4 py-2 text-center" style="width: 80px;">စဥ်</th>
-                            <th scope="col" class="py-2 ps-3">တိုင်းဒေသကြီး/ပြည်နယ်</th>
-                            <th scope="col" class="py-2 ps-3">ဓာတ်ပုံ</th>
-                            <th scope="col" class="py-2 text-end pe-4" style="width: 240px;">ပြင်ဆင်ရန်</th>
+                    <thead class="bg-light border-bottom border-secondary-subtle align-middle">
+                        <tr class="text-secondary fw-bold text-nowrap" style="font-size: 0.95rem;">
+                            <th scope="col" class="py-3 text-center" style="width: 70px;">စဥ်</th>
+                            <th scope="col" class="py-3 ps-3">တိုင်းဒေသကြီး/ပြည်နယ်</th>
+                            <th scope="col" class="py-3 ps-3">ဓာတ်ပုံ</th>
+                            <th scope="col" class="py-3 text-center" style="width: 180px;">လုပ်ဆောင်ချက်များ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,11 +110,13 @@
                                         <span class="text-muted" style="font-size: 0.8rem;">ဓာတ်ပုံမရှိပါ</span>
                                     @endif
                                 </td>
-                                <td class="text-end pe-4 py-2">
-                                    <div class="d-flex justify-content-end gap-2">
+                                <!-- ပြင်ဆင်ရန် နေရာ -->
+                                <td class="text-center py-3">
+                                    <div class="d-flex justify-content-center gap-2">
                                         {{-- Edit Button --}}
                                         <a href="{{ route('admin.divisions.edit', $division->id) }}"
-                                            class="text-warning fs-5 d-inline-block" title="Edit User">
+                                            class="text-warning fs-5 d-inline-flex justify-content-center align-items-center rounded-circle"
+                                            style="width: 36px; height: 36px;" title="Edit Division">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     </div>

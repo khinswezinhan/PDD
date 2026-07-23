@@ -3,7 +3,22 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <div class="container py-5" style="max-width: 800px;">
+    <style>
+        /* Input များနှင့် Dropdown များအတွက် လိမ္မော်ရောင် Border နှင့် Shadow Effect */
+        .custom-orange-input {
+            border-color: #fdba74 !important;
+            /* Soft Orange Border */
+        }
+
+        .custom-orange-input:focus {
+            border-color: #f97316 !important;
+            /* Vivid Orange on Focus */
+            box-shadow: 0 0 0 0.25rem rgba(249, 115, 22, 0.25) !important;
+            /* Orange Glow Shadow */
+        }
+    </style>
+
+    <div class="container py-2" style="max-width: 800px;">
 
         <div class="mb-4 d-flex align-items-center gap-2">
             <h4 class="fw-bold text-dark m-0" style="letter-spacing: -0.5px;">ဘုရားစေတီပုထိုးအသစ် ထည့်သွင်းရန်</h4>
@@ -13,13 +28,14 @@
             <form action="{{ route('admin.pagodas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class="mb-4">
+                {{-- စေတီပုထိုးတော်ဘွဲ့အမည် --}}
+                <div class="mb-3">
                     <label for="name" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         စေတီပုထိုးတော်ဘွဲ့အမည် <span class="text-danger">*</span>
                     </label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}" required
                         placeholder="ဥပမာ - ရွှေတိဂုံစေတီတော်မြတ်ကြီး"
-                        class="form-control py-2.5 rounded-2 @error('name') is-invalid @enderror"
+                        class="form-control py-2.5 rounded-2 custom-orange-input @error('name') is-invalid @enderror"
                         style="font-size: 0.95rem;">
 
                     @error('name')
@@ -29,13 +45,14 @@
                     @enderror
                 </div>
 
+                {{-- Division, District, Township --}}
                 <div class="row">
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-4 mb-3">
                         <label for="division-id" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                             တိုင်းဒေသကြီး / ပြည်နယ် <span class="text-danger">*</span>
                         </label>
                         <select id="division-id" name="division_id" required
-                            class="form-select py-2.5 rounded-2 @error('division_id') is-invalid @enderror"
+                            class="form-select py-2.5 rounded-2 custom-orange-input @error('division_id') is-invalid @enderror"
                             style="font-size: 0.95rem;">
                             <option value="">-- ရွေးချယ်ရန် --</option>
                             @foreach ($divisions as $division)
@@ -50,12 +67,12 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-4 mb-3">
                         <label for="district-id" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                             ခရိုင် ရွေးချယ်ရန် <span class="text-danger">*</span>
                         </label>
                         <select id="district-id" name="district_id" required disabled
-                            class="form-select py-2.5 rounded-2 @error('district_id') is-invalid @enderror"
+                            class="form-select py-2.5 rounded-2 custom-orange-input @error('district_id') is-invalid @enderror"
                             style="font-size: 0.95rem;">
                             <option value="">-- တိုင်းဒေသကြီးအရင်ရွေးပါ --</option>
                         </select>
@@ -64,12 +81,12 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-4 mb-3">
                         <label for="township-id" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                             မြို့နယ် ရွေးချယ်ရန် <span class="text-danger">*</span>
                         </label>
                         <select id="township-id" name="township_id" required disabled
-                            class="form-select py-2.5 rounded-2 @error('township_id') is-invalid @enderror"
+                            class="form-select py-2.5 rounded-2 custom-orange-input @error('township_id') is-invalid @enderror"
                             style="font-size: 0.95rem;">
                             <option value="">-- ခရိုင်အရင်ရွေးပါ --</option>
                         </select>
@@ -79,12 +96,13 @@
                     </div>
                 </div>
 
-                <div class="mb-4">
+                {{-- ဓာတ်ပုံ --}}
+                <div class="mb-3">
                     <label for="photo" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         စေတီတော်ဓာတ်ပုံ
                     </label>
                     <input type="file" name="photo" id="photo" accept="image/*"
-                        class="form-control py-2 rounded-2 @error('photo') is-invalid @enderror"
+                        class="form-control py-2 rounded-2 custom-orange-input @error('photo') is-invalid @enderror"
                         style="font-size: 0.95rem;">
 
                     <!-- Live Image Preview Wrapper -->
@@ -101,16 +119,17 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                {{-- ဝဘ်ဆိုက်လင့်ခ် --}}
+                <div class="mb-3">
                     <label for="website" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         ဝဘ်ဆိုက်လင့်ခ်
                     </label>
                     <div class="input-group">
-                        <span class="input-group-text bg-light text-secondary border-end-0"><i
+                        <span class="input-group-text bg-light text-secondary border-end-0 custom-orange-input"><i
                                 class="fas fa-globe"></i></span>
                         <input type="url" name="website" id="website" value="{{ old('website') }}"
                             placeholder="https://example.com"
-                            class="form-control py-2.5 rounded-end-2 @error('website') is-invalid @enderror"
+                            class="form-control py-2.5 rounded-end-2 custom-orange-input @error('website') is-invalid @enderror"
                             style="font-size: 0.95rem;">
                     </div>
                     @error('website')
@@ -120,17 +139,17 @@
                     @enderror
                 </div>
 
-                <!-- မြေပုံတည်နေရာလင့်ခ် (Google Map Link) - အသစ်ထည့်သွင်းထားသော နေရာ -->
-                <div class="mb-4">
+                {{-- မြေပုံတည်နေရာလင့်ခ် --}}
+                <div class="mb-3">
                     <label for="map_link" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         မြေပုံတည်နေရာလင့်ခ် (Google Map Link) <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
-                        <span class="input-group-text bg-light text-secondary border-end-0"><i
+                        <span class="input-group-text bg-light text-secondary border-end-0 custom-orange-input"><i
                                 class="fas fa-map-marker-alt"></i></span>
                         <input type="url" name="map_link" id="map_link" value="{{ old('map_link') }}" required
                             placeholder="https://maps.app.goo.gl/..."
-                            class="form-control py-2.5 rounded-end-2 @error('map_link') is-invalid @enderror"
+                            class="form-control py-2.5 rounded-end-2 custom-orange-input @error('map_link') is-invalid @enderror"
                             style="font-size: 0.95rem;">
                     </div>
                     @error('map_link')
@@ -140,12 +159,14 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                {{-- တည်နေရာလိပ်စာအပြည့်အစုံ --}}
+                <div class="mb-3">
                     <label for="address" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         တည်နေရာလိပ်စာအပြည့်အစုံ (Address) <span class="text-danger">*</span>
                     </label>
                     <textarea name="address" id="address" rows="3" required placeholder=""
-                        class="form-control rounded-2 @error('address') is-invalid @enderror" style="font-size: 0.95rem; resize: none;">{{ old('address') }}</textarea>
+                        class="form-control rounded-2 custom-orange-input @error('address') is-invalid @enderror"
+                        style="font-size: 0.95rem; resize: none;">{{ old('address') }}</textarea>
                     @error('address')
                         <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
                             <i class="fas fa-exclamation-circle"></i> {{ $message }}
@@ -153,12 +174,14 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                {{-- စေတီတော်သမိုင်းအကျဉ်း --}}
+                <div class="mb-3">
                     <label for="history" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         စေတီတော်သမိုင်းအကျဉ်း <span class="text-danger">*</span>
                     </label>
                     <textarea name="history" id="history" rows="5" required placeholder=""
-                        class="form-control rounded-2 @error('history') is-invalid @enderror" style="font-size: 0.95rem;">{{ old('history') }}</textarea>
+                        class="form-control rounded-2 custom-orange-input @error('history') is-invalid @enderror"
+                        style="font-size: 0.95rem;">{{ old('history') }}</textarea>
                     @error('history')
                         <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
                             <i class="fas fa-exclamation-circle"></i> {{ $message }}
@@ -166,29 +189,34 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label>Status:</label><br>
-
-                    <input type="radio" name="status" value="famous" id="famous"
-                        {{ old('status') == 'famous' ? 'checked' : '' }}>
-                    <label for="famous">Famous</label>
-
-                    <input type="radio" name="status" value="normal" id="normal"
-                        {{ old('status') == 'normal' ? 'checked' : '' }}>
-                    <label for="normal">Normal</label>
+                {{-- Status (Dropdown Select သို့ ပြောင်းထားသည်) --}}
+                <div class="mb-3">
+                    <label for="status" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
+                        အခြေအနေ (Status) <span class="text-danger">*</span>
+                    </label>
+                    <select name="status" id="status" required
+                        class="form-select py-2.5 rounded-2 custom-orange-input @error('status') is-invalid @enderror"
+                        style="font-size: 0.95rem;">
+                        <option value="">-- အခြေအနေ ရွေးချယ်ပါ --</option>
+                        <option value="famous" {{ old('status') == 'famous' ? 'selected' : '' }}>Famous
+                            (ထင်ရှားကျော်ကြားသော)</option>
+                        <option value="normal" {{ old('status') == 'normal' ? 'selected' : '' }}>Normal (သာမန်)</option>
+                    </select>
 
                     @error('status')
-                        <span class="text-danger">{{ $message }}</span>
+                        <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                        </div>
                     @enderror
                 </div>
 
+                {{-- Buttons --}}
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-4">
-                    <a href="{{ route('admin.pagodas.index') }}"
-                        class="btn btn-outline-secondary px-4 py-2 rounded-2 fw-medium">
+                    <a href="{{ route('admin.pagodas.index') }}" class="btn btn-secondary px-4 py-2 rounded-2 fw-medium">
                         Cancel
                     </a>
                     <button type="submit"
-                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        class="btn orange-btn px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
                         <i class="fas fa-save"></i> သိမ်းဆည်းမည်
                     </button>
                 </div>
@@ -209,7 +237,6 @@
             divisionSelect.addEventListener('change', function() {
                 const divisionId = this.value;
 
-                // ခရိုင် နှင့် မြို့နယ် dropdown များကို format ချပြီး ပိတ်ထားမည်
                 districtSelect.innerHTML = '<option value="">-- ခရိုင် ရွေးချယ်ရန် --</option>';
                 districtSelect.disabled = true;
                 townshipSelect.innerHTML = '<option value="">-- ခရိုင်အရင်ရွေးပါ --</option>';
@@ -259,7 +286,6 @@
 
                 if (!districtId) return;
 
-                // Route dynamically created with Laravel Route Name
                 let url = "{{ route('admin.get-townships-by-district', ':id') }}";
                 url = url.replace(':id', districtId);
 
@@ -293,7 +319,7 @@
                     });
             });
 
-            // ၃။ Image Live Preview စနစ် ရေးဆွဲခြင်း
+            // ၃။ Image Live Preview စနစ်
             photoInput.addEventListener('change', function() {
                 const file = this.files[0];
                 if (file) {

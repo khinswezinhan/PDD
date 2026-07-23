@@ -1,45 +1,41 @@
 @extends('components.admin-layout')
 
 @section('content')
-    <!-- Tailwind Container -->
-    <div class="w-full max-w-[700px] mx-auto px-4 md:px-6 py-8">
+    <div class="container py-2" style="max-width: 500px;">
 
-        {{-- Header Title --}}
-        <div class="mb-5">
-            <h4 class="text-lg md:text-xl font-bold text-gray-800 tracking-tight m-0">
-                Edit Admin User
-            </h4>
+        <div class="mb-3">
+            <h4 class="fw-bold text-dark fs-5 m-0" style="letter-spacing: -0.5px;">Edit Admin User</h4>
         </div>
 
-        {{-- Main Card Form --}}
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
-            <!-- Action ကို update route ပြောင်းပြီး method('PUT') ထည့်ထားပါတယ် -->
+        <div class="card border shadow-sm rounded-3 bg-white p-4">
             <form action="{{ route('admin.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                {{-- Name Input --}}
-                <div class="mb-5">
-                    <label for="name" class="block text-xs font-bold uppercase text-gray-500 tracking-wider mb-2">
+                {{-- Name --}}
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         Name
                     </label>
                     <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required
-                        class="w-full rounded-lg border-gray-300 text-sm py-2.5 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('name') border-red-500 focus:border-red-500 focus:ring-red-500 @enderror">
+                        class="form-control py-2.5 rounded-2 shadow-sm @error('name') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
 
                     @error('name')
-                        <div class="text-red-500 text-xs flex items-center gap-1 mt-2 font-medium">
-                            <i class="fas fa-exclamation-circle text-[10px]"></i> {{ $message }}
+                        <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
                         </div>
                     @enderror
                 </div>
 
-                {{-- Role Dropdown --}}
-                <div class="mb-5">
-                    <label for="role_id" class="block text-xs font-bold uppercase text-gray-500 tracking-wider mb-2">
+                {{-- Role --}}
+                <div class="mb-3">
+                    <label for="role_id" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         Role
                     </label>
-                    <select name="role_id" id="role_id" required
-                        class="w-full rounded-lg border-gray-300 text-sm py-2.5 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    <select name="role_id" id="role_id"
+                        class="form-select py-2.5 rounded-2 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                        style="font-size: 0.95rem; border-color: #fdba74;" required>
                         <option value="">--Select a role--</option>
                         @foreach ($roles as $role)
                             <option value="{{ $role->id }}"
@@ -50,75 +46,79 @@
                     </select>
                 </div>
 
-                {{-- Email Input --}}
-                <div class="mb-5">
-                    <label for="email" class="block text-xs font-bold uppercase text-gray-500 tracking-wider mb-2">
+                {{-- Email --}}
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         Email
                     </label>
                     <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required
-                        class="w-full rounded-lg border-gray-300 text-sm py-2.5 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('email') border-red-500 focus:border-red-500 focus:ring-red-500 @enderror">
+                        class="form-control py-2.5 rounded-2 shadow-sm @error('email') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
 
                     @error('email')
-                        <div class="text-red-500 text-xs flex items-center gap-1 mt-2 font-medium">
-                            <i class="fas fa-exclamation-circle text-[10px]"></i> {{ $message }}
+                        <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
                         </div>
                     @enderror
                 </div>
 
-                {{-- Password Input (Optional for editing) --}}
-                <div class="mb-5">
-                    <label for="password" class="block text-xs font-bold uppercase text-gray-500 tracking-wider mb-2">
-                        Password <span class="text-gray-400 font-normal lowercase">(leave blank if unchanged)</span>
+                {{-- Password (Optional) --}}
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
+                        Password <span class="text-muted fw-normal lowercase fs-7">(leave blank if unchanged)</span>
                     </label>
                     <input type="password" name="password" id="password"
-                        class="w-full rounded-lg border-gray-300 text-sm py-2.5 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('password') border-red-500 focus:border-red-500 focus:ring-red-500 @enderror">
+                        class="form-control py-2.5 rounded-2 shadow-sm @error('password') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
+
+                    @error('password')
+                        <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
+                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
-                {{-- Confirm Password Input --}}
-                <div class="mb-5">
-                    <label for="password_confirmation"
-                        class="block text-xs font-bold uppercase text-gray-500 tracking-wider mb-2">
+                {{-- Confirm Password --}}
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label fw-bold text-secondary mb-2"
+                        style="font-size: 0.9rem;">
                         Confirm Password
                     </label>
                     <input type="password" name="password_confirmation" id="password_confirmation"
-                        class="w-full rounded-lg border-gray-300 text-sm py-2.5 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        class="form-control py-2.5 rounded-2 shadow-sm @error('password_confirmation') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
                 </div>
 
-                {{-- Status Radio Buttons --}}
-                <div class="mb-6">
-                    <label class="block text-xs font-bold uppercase text-gray-500 tracking-wider mb-3">
+                {{-- Status Dropdown --}}
+                <div class="form-group mb-3">
+                    <label for="status" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         Status
                     </label>
-                    <div class="flex items-center gap-6 text-sm text-gray-700">
-                        <label class="inline-flex items-center cursor-pointer">
-                            <input type="radio" name="status" value="active" id="active"
-                                class="text-blue-600 focus:ring-blue-500 border-gray-300"
-                                {{ old('status', $user->status) == 'active' ? 'checked' : '' }}>
-                            <span class="ml-2 font-medium">Active</span>
-                        </label>
 
-                        <label class="inline-flex items-center cursor-pointer">
-                            <input type="radio" name="status" value="inactive" id="inactive"
-                                class="text-blue-600 focus:ring-blue-500 border-gray-300"
-                                {{ old('status', $user->status) == 'inactive' ? 'checked' : '' }}>
-                            <span class="ml-2 font-medium">Inactive</span>
-                        </label>
-                    </div>
+                    <select name="status" id="status" required
+                        class="form-select py-2.5 rounded-2 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
+                        <option value="active" {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>Active
+                        </option>
+                        <option value="inactive" {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>
+                            Inactive</option>
+                    </select>
 
                     @error('status')
-                        <span class="text-red-500 text-xs font-medium block mt-2">{{ $message }}</span>
+                        <span class="text-danger text-xs mt-1 d-block">{{ $message }}</span>
                     @enderror
                 </div>
 
                 {{-- Form Action Buttons --}}
-                <div class="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
+                <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-2">
                     <a href="{{ route('admin.users.index') }}"
-                        class="px-5 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                        class="btn btn-outline-secondary px-4 py-2 rounded-2 fw-medium">
                         Cancel
                     </a>
 
                     <button type="submit"
-                        class="px-5 py-2 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors">
+                        class="btn text-white px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm"
+                        style="background-color: #f97316; border-color: #f97316;">
                         Update
                     </button>
                 </div>

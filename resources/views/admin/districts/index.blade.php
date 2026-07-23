@@ -65,7 +65,7 @@
                 <div class="col-12 col-md-auto d-flex gap-2">
                     <button type="submit"
                         style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
-                        Filter
+                        ရှာရန်
                     </button>
 
                     @if (request()->filled('search') || request()->filled('division_id'))
@@ -83,12 +83,12 @@
         <div class="card border border-light-subtle shadow-sm rounded-3 overflow-hidden bg-white">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light border-bottom border-secondary-subtle">
-                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">
-                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">စဥ်</th>
+                    <thead class="bg-light border-bottom border-secondary-subtle align-middle">
+                        <tr class="text-secondary fw-bold text-nowrap" style="font-size: 0.95rem;">
+                            <th scope="col" class="py-3 text-center" style="width: 70px;">စဥ်</th>
                             <th scope="col" class="py-3 ps-3">ခရိုင်အမည်</th>
                             <th scope="col" class="py-3 ps-3">တိုင်းဒေသကြီး/ပြည်နယ်</th>
-                            <th scope="col" class="py-3 text-end pe-4" style="width: 240px;">လုပ်ဆောင်ချက်များ</th>
+                            <th scope="col" class="py-3 text-center" style="width: 180px;">လုပ်ဆောင်ချက်များ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,25 +107,15 @@
                                         {{ $district->division->name ?? 'N/A' }}
                                     </span>
                                 </td>
-                                <td class="text-end pe-4 py-3">
-                                    <div class="d-flex justify-content-end gap-2">
+                                <!-- ပြင်ဆင်ရန် နေရာ -->
+                                <td class="text-center py-3">
+                                    <div class="d-flex justify-content-center gap-2">
                                         {{-- Edit Button --}}
                                         <a href="{{ route('admin.districts.edit', $district->id) }}"
-                                            class="text-warning fs-5 d-inline-block" title="Edit User">
+                                            class="text-warning fs-5 d-inline-flex justify-content-center align-items-center rounded-circle"
+                                            style="width: 36px; height: 36px;" title="Edit District">
                                             <i class="fas fa-edit"></i>
                                         </a>
-
-                                        {{-- Delete Button (အလုပ်လုပ်အောင် Comment ပြန်ဖွင့်ပေးထားပါတယ်) --}}
-                                        {{-- <form action="{{ route('divisions.destroy', $division->id) }}" method="POST"
-                                            class="d-inline"
-                                            onsubmit="return confirm('ဤတိုင်းဒေသကြီးကို ဖျက်ရန် သေချာပါသလည့်လည့်?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="btn btn-sm btn-outline-danger px-3 rounded-2 d-inline-flex align-items-center fw-medium">
-                                                <i class="fas fa-trash-alt me-1 small"></i> Delete
-                                            </button>
-                                        </form> --}}
                                     </div>
                                 </td>
                             </tr>

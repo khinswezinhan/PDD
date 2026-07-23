@@ -2,10 +2,10 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <div class="container py-5" style="max-width: 700px;">
+    <div class="container py-2" style="max-width: 700px;">
 
         <div class="mb-4">
-            <h4 class="fw-bold text-dark fs-4 m-0" style="letter-spacing: -0.5px;">မြို့နယ်အသစ်ထည့်ရန်</h4>
+            <h4 class="fw-bold text-dark fs-5 m-0" style="letter-spacing: -0.5px;">မြို့နယ်အသစ်ထည့်ရန်</h4>
         </div>
 
         <div class="card border border-light-subtle shadow-sm rounded-3 bg-white p-4">
@@ -84,13 +84,14 @@
 
                 {{-- Form Action Buttons --}}
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-4">
-                    <a href="{{ route('admin.townships.index') }}"
-                        class="btn btn-outline-secondary px-4 py-2 rounded-2 fw-medium">
+                    {{-- မလုပ်တော့ပါ Button (မီးခိုးရောင်) --}}
+                    <a href="{{ route('admin.townships.index') }}" class="btn btn-secondary px-4 py-2 rounded-2 fw-medium">
                         မလုပ်တော့ပါ
                     </a>
 
+                    {{-- သိမ်းမည် Button (လိမ္မော်ရောင်) --}}
                     <button type="submit"
-                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        class="btn text-white px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm orange-btn">
                         သိမ်းမည်
                     </button>
                 </div>

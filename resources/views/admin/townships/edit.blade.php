@@ -2,10 +2,10 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <div class="container py-5" style="max-width: 700px;">
+    <div class="container py-2" style="max-width: 700px;">
 
         <div class="mb-4">
-            <h4 class="fw-bold text-dark FS-5 m-0" style="letter-spacing: -0.5px;">မြို့နယ်ပြင်ဆင်ရန်</h4>
+            <h4 class="fw-bold text-dark fs-5 m-0" style="letter-spacing: -0.5px;">မြို့နယ်ပြင်ဆင်ရန်</h4>
         </div>
 
         <div class="card border border-light-subtle shadow-sm rounded-3 bg-white p-4">
@@ -13,14 +13,14 @@
                 @csrf
                 @method('PUT')
 
-                {{-- Input Field Group --}}
-                <div class="mb-4">
+                {{-- မြို့နယ်အမည် --}}
+                <div class="mb-2">
                     <label for="name" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         မြို့နယ်အမည်
                     </label>
                     <input type="text" name="name" id="name" value="{{ old('name', $township->name) }}" required
-                        class="form-control py-2.5 rounded-2 @error('name') is-invalid @enderror"
-                        style="font-size: 0.95rem;">
+                        class="form-control py-2.5 rounded-2 custom-orange-input @error('name') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
 
                     @error('name')
                         <div class="invalid-feedback d-flex align-items-center gap-1 mt-2">
@@ -29,18 +29,17 @@
                     @enderror
                 </div>
 
-                {{-- Division Select Dropdown (ဒေတာဟောင်းကို Auto-select မှတ်ထားပေးမည်) --}}
-                <div class="mb-4">
+                {{-- Division Select Dropdown --}}
+                <div class="mb-2">
                     <label for="division-id" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         တိုင်းဒေသကြီး/ပြည်နယ်ရွေးချယ်ပါ
                     </label>
 
                     <select name="division_id" id="division-id" required
-                        class="form-select py-2.5 rounded-2 @error('division_id') is-invalid @enderror"
-                        style="font-size: 0.95rem;">
+                        class="form-select py-2.5 rounded-2 custom-orange-input @error('division_id') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
                         <option value="">-- တိုင်းဒေသကြီး/ပြည်နယ်ရွေးချယ်ပါ --</option>
                         @foreach ($divisions as $division)
-                            {{-- Township -> District -> Division Relation မှတစ်ဆင့် လက်ရှိ Division ID ကို စစ်ဆေးပါသည် --}}
                             <option value="{{ $division->id }}"
                                 {{ old('division_id', $township->district->division_id ?? '') == $division->id ? 'selected' : '' }}>
                                 {{ $division->name }}
@@ -55,17 +54,16 @@
                     @enderror
                 </div>
 
-                {{-- District Select Dropdown (ဒေတာဟောင်းကို Auto-select မှတ်ထားပေးမည်) --}}
-                <div class="mb-4">
+                {{-- District Select Dropdown --}}
+                <div class="mb-2">
                     <label for="district-id" class="form-label fw-bold text-secondary mb-2" style="font-size: 0.9rem;">
                         ခရိုင်ရွေးချယ်ရန်
                     </label>
 
                     <select name="district_id" id="district-id" required
-                        class="form-select py-2.5 rounded-2 @error('district_id') is-invalid @enderror"
-                        style="font-size: 0.95rem;">
+                        class="form-select py-2.5 rounded-2 custom-orange-input @error('district_id') is-invalid @enderror"
+                        style="font-size: 0.95rem; border-color: #fdba74;">
                         <option value="">-- ခရိုင်ရွေးချယ်ပါ --</option>
-                        {{-- Controller မှ ပို့လိုက်သော လက်ရှိ Division အောက်ရှိ District များအားလည်း Loop ပတ်ပြသမည် --}}
                         @foreach ($districts as $district)
                             <option value="{{ $district->id }}"
                                 {{ old('district_id', $township->district_id) == $district->id ? 'selected' : '' }}>
@@ -83,13 +81,12 @@
 
                 {{-- Form Action Buttons --}}
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-4">
-                    <a href="{{ route('admin.townships.index') }}"
-                        class="btn btn-outline-secondary px-4 py-2 rounded-2 fw-medium">
+                    <a href="{{ route('admin.townships.index') }}" class="btn btn-secondary px-4 py-2 rounded-2 fw-medium">
                         မလုပ်တော့ပါ
                     </a>
 
                     <button type="submit"
-                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        class="btn orange-btn px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
                         အသစ်ပြင်ဆင်မည်
                     </button>
                 </div>

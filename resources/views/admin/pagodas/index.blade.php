@@ -78,7 +78,7 @@
                 <div class="col-12 col-md-auto d-flex gap-2">
                     <button type="submit"
                         style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
-                        Filter
+                        ရှာရန်
                     </button>
 
                     @if (request()->filled('search_pagoda') || request()->filled('search_township') || request()->filled('division_id'))
@@ -97,18 +97,19 @@
         <div class="card border border-light-subtle shadow-sm rounded-3 overflow-hidden bg-white">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light border-bottom border-secondary-subtle">
-                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">
-                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">စဥ်</th>
+                    <thead class="bg-light border-bottom border-secondary-subtle align-middle">
+                        <tr class="text-secondary text-uppercase fw-bold text-nowrap"
+                            style="font-size: 0.95rem; letter-spacing: 0.5px;">
+                            <th scope="col" class="py-3 text-center" style="width: 60px;">စဥ်</th>
                             <th scope="col" class="py-3 ps-3">စေတီပုထိုးအမည်</th>
                             <th scope="col" class="py-3 ps-3">တိုင်းဒေသကြီး</th>
                             <th scope="col" class="py-3 ps-3">ခရိုင်</th>
                             <th scope="col" class="py-3 ps-3">မြို့နယ်</th>
-                            <th scope="col" class="py-3 ps-3" style="width: 100px;">ဓာတ်ပုံ</th>
+                            <th scope="col" class="py-3 text-center">ဓာတ်ပုံ</th>
                             <th scope="col" class="py-3 ps-3">ဝဘ်ဆိုက်</th>
                             <th scope="col" class="py-3 ps-3">လိပ်စာ</th>
-                            <th scope="col" class="py-3 ps-3" style="width: 200px;">သမိုင်းအကျဉ်း</th>
-                            <th scope="col" class="py-3 text-end pe-4" style="width: 200px;">ပြင်ဆင်ချက်များ</th>
+                            <th scope="col" class="py-3 ps-3" style="min-width: 180px;">သမိုင်းအကျဉ်း</th>
+                            <th scope="col" class="py-3 text-center">လုပ်ဆောင်ချက်များ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -176,10 +177,13 @@
                                     </span>
                                 </td>
 
-                                <td class="text-end pe-4 py-3">
-                                    <div class="d-flex justify-content-end gap-2">
+                                <!-- ပြင်ဆင်ရန် နေရာ -->
+                                <td class="text-center py-3">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        {{-- Edit Button --}}
                                         <a href="{{ route('admin.pagodas.edit', $pagoda->id) }}"
-                                            class="text-warning fs-5 d-inline-block" title="Edit Pagoda">
+                                            class="text-warning fs-5 d-inline-flex justify-content-center align-items-center rounded-circle"
+                                            style="width: 36px; height: 36px;" title="Edit Pagoda">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     </div>

@@ -1,11 +1,11 @@
 <nav x-data="{ open: false }" class="bg-gold border-b border-gray-100 w-full shadow-sm">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Primary Navigation Menu (max-w-7xl ကို ဖြုတ်ပြီး w-full သုံးထားပါသည်) -->
+    <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Navigation Links -->
-                <div class="hidden sm:-my-px sm:ms-10 sm:flex sm:items-center gap-3">
-                    <!-- Logo SVG (Size သီးသန့်ထိန်းထားသည်) -->
+            <div class="flex items-center">
+                <!-- Navigation Links (sm:ms-10 ကို ဖယ်ထုတ်ပြီး ဘယ်ဘက်ဆုံးသို့ ကပ်ပေးထားပါသည်) -->
+                <div class="hidden sm:-my-px sm:flex sm:items-center gap-3">
+                    <!-- Logo SVG -->
                     <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center">
                         <svg class="w-full h-full text-amber-500" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -25,8 +25,8 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <!-- Settings Dropdown (ညာဘက်အစွန်ဆုံးသို့ ရောက်ရှိသွားမည်) -->
+            <div class="hidden sm:flex sm:items-center">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -44,7 +44,6 @@
                     </x-slot>
 
                     <x-slot name="content">
-
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -79,7 +78,6 @@
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-
         </div>
     </div>
 </nav>
