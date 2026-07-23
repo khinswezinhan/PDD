@@ -25,7 +25,7 @@
         .famous-pagination-wrapper nav a,
         .famous-pagination-wrapper nav button,
         .famous-pagination-wrapper nav span:not([aria-current="page"]):not([aria-disabled="true"]) span {
-            color: #1f2937 !important;           /* စာသားအရောင် အမည်းရောင် */
+            color: #1f2937 !important;          /* စာသားအရောင် အမည်းရောင် */
             background-color: #ffffff !important;  /* နောက်ခံ အဖြူရောင် */
             border-color: #d1d5db !important;      /* ဘောင် မီးခိုးရောင် */
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -106,13 +106,6 @@
                                 x-text="slide.subtitle"></h2>
                             <p class="mt-3 text-base sm:text-lg text-gray-100 font-semibold leading-relaxed drop-shadow-md"
                                 x-text="slide.desc"></p>
-
-                            <div class="mt-7 flex justify-center sm:justify-start">
-                                <a href="#"
-                                    class="inline-block w-full sm:w-auto text-center px-8 py-3.5 text-sm sm:text-base font-bold rounded-full text-white bg-cyan-600 hover:bg-cyan-700 shadow-xl transition duration-150 transform hover:-translate-y-0.5 tracking-wider uppercase decoration-none">
-                                    Join Us
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,7 +137,8 @@
     {{-- တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ ကဏ္ဍ --}}
     <section id="regions-pagodas" class="max-w-7xl mx-auto pt-8 pb-6 scroll-mt-24">
         <div class="text-center mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</h2>
+            <!-- ဤနေရာတွင် text-orange-500 အဖြစ်ပြောင်းလဲပေးထားပါသည် -->
+            <h2 class="text-2xl font-bold text-orange-500 tracking-tight">တိုင်းဒေသကြီး၊ ပြည်နယ်ရှိဘုရားများ</h2>
             <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက်
                 စေတီပုထိုးများ</p>
         </div>
@@ -158,10 +152,9 @@
                         <div>
                             <a href="{{ route('division.show', $division->id) }}"
                                 class="block h-40 bg-gray-100 relative overflow-hidden">
-                                 
-                                    <img src="{{ asset($division->photo) }}" alt="{{ $division->photo }}"
-                                        class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                        
+                               
+                                <img src="{{ asset($division->photo) }}" alt="{{ $division->photo }}"
+                                    class="w-full h-full object-cover hover:scale-105 transition duration-300">
                             </a>
 
                             <div class="p-4">
@@ -179,7 +172,7 @@
 
                         <div class="px-4 pb-4 pt-0">
                             <a href="{{ route('division.show', $division->id) }}"
-                                class="inline-flex items-center text-xs font-semibold text-orange-500 hover:text-orange-600 transition decoration-none">
+                                class="inline-flex items-center text-xs font-semibold text-orange-600 hover:text-orange-600 transition decoration-none">
                                 အသေးစိတ်ကြည့်ရန်
                                 <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -205,8 +198,9 @@
     {{-- ထင်ရှားသော ဘုရားများ ကဏ္ဍ --}}
     <section id="famous-pagodas" class="max-w-7xl mx-auto pt-6 pb-16 scroll-mt-24 border-t border-gray-100">
         <div class="text-center mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">
-                <a href="{{ url('/#famous-pagodas') }}" class="text-gray-900 hover:text-orange-500 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
+            <h2 class="text-2xl font-bold tracking-tight">
+                <!-- ဤနေရာတွင် text-orange-500 အဖြစ်ပြောင်းလဲပေးထားပါသည် -->
+                <a href="{{ url('/#famous-pagodas') }}" class="text-orange-500 hover:text-orange-600 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
                     တန်ခိုးကြီးဘုရားများ
                 </a>
             </h2>
@@ -246,7 +240,7 @@
                         </div>
                         
                         <div class="px-4 pb-4 pt-0">
-                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-cyan-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
+                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-orange-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
                                 အသေးစိတ်ဖတ်ရန် →
                             </a>
                         </div>
