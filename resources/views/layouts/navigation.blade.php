@@ -1,5 +1,5 @@
-{{-- 🌟 x-data တွင် open: false (Mobile Menu) နှင့် showLogin: false (Login Modal) ကို ပေါင်းစပ်ထိန်းချုပ်ထားပါသည် --}}
-<nav x-data="{ open: false, showLogin: false }" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+{{-- 🌟 x-data တွင် activeTab ကို ပုံသေမထားဘဲ အစတွင် အလွတ်ထားကာ x-init ဖြင့် စစ်ဆေးပေးပါမည် --}}
+<nav x-data="{ open: false, showLogin: false, activeTab: '' }" x-init="activeTab = window.location.hash || ''" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 gap-4">
 
@@ -17,16 +17,27 @@
                 </a>
 
                 <div class="hidden sm:flex items-center space-x-8 text-base">
+                    {{-- Desktop Menu Item 1 --}}
                     <a href="{{ url('/#regions-pagodas') }}"
-                        class="text-gray-900 hover:text-orange-500 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
+                        @click="activeTab = '#regions-pagodas'"
+                        :class="activeTab === '#regions-pagodas' ? 'text-orange-500' : 'text-gray-900 hover:text-orange-500'"
+                        class="transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
                         တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ
                     </a>
+
+                    {{-- Desktop Menu Item 2 --}}
                     <a href="{{ url('/#famous-pagodas') }}"
-                        class="text-gray-900 hover:text-orange-500 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
+                        @click="activeTab = '#famous-pagodas'"
+                        :class="activeTab === '#famous-pagodas' ? 'text-orange-500' : 'text-gray-900 hover:text-orange-500'"
+                        class="transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
                         တန်ခိုးကြီးဘုရားများ
                     </a>
+
+                    {{-- Desktop Menu Item 3 --}}
                     <a href="{{ url('/#contact') }}"
-                        class="text-gray-900 hover:text-orange-500 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
+                        @click="activeTab = '#contact'"
+                        :class="activeTab === '#contact' ? 'text-orange-500' : 'text-gray-900 hover:text-orange-500'"
+                        class="transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
                         ဆက်သွယ်ရန်
                     </a>
                 </div>
@@ -114,12 +125,20 @@
     <div :class="{ 'block': open, 'hidden': !open }"
         class="hidden sm:hidden bg-gray-50 border-t border-gray-200 max-h-[calc(100vh-80px)] overflow-y-auto">
         <div class="pt-2 pb-3 space-y-1 px-4">
-            <a href="{{ url('/#regions-pagodas') }}" @click="open = false"
-                class="block pl-3 pr-4 py-2.5 border-l-4 border-transparent text-base font-extrabold text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500 decoration-none">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</a>
-            <a href="{{ url('/#famous-pagodas') }}" @click="open = false"
-                class="block pl-3 pr-4 py-2.5 border-l-4 border-transparent text-base font-extrabold text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500 decoration-none">တန်ခိုးကြီးဘုရားများ</a>
-            <a href="{{ url('/#contact') }}" @click="open = false"
-                class="block pl-3 pr-4 py-2.5 border-l-4 border-transparent text-base font-extrabold text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500 decoration-none">ဆက်သွယ်ရန်</a>
+            <a href="{{ url('/#regions-pagodas') }}" 
+                @click="activeTab = '#regions-pagodas'; open = false"
+                :class="activeTab === '#regions-pagodas' ? 'border-orange-500 text-orange-500 bg-orange-50/50' : 'border-transparent text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500'"
+                class="block pl-3 pr-4 py-2.5 border-l-4 text-base font-extrabold decoration-none">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</a>
+            
+            <a href="{{ url('/#famous-pagodas') }}" 
+                @click="activeTab = '#famous-pagodas'; open = false"
+                :class="activeTab === '#famous-pagodas' ? 'border-orange-500 text-orange-500 bg-orange-50/50' : 'border-transparent text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500'"
+                class="block pl-3 pr-4 py-2.5 border-l-4 text-base font-extrabold decoration-none">တန်ခိုးကြီးဘုရားများ</a>
+            
+            <a href="{{ url('/#contact') }}" 
+                @click="activeTab = '#contact'; open = false"
+                :class="activeTab === '#contact' ? 'border-orange-500 text-orange-500 bg-orange-50/50' : 'border-transparent text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500'"
+                class="block pl-3 pr-4 py-2.5 border-l-4 text-base font-extrabold decoration-none">ဆက်သွယ်ရန်</a>
 
             @guest
                 <a href="#" @click.prevent="showLogin = true; open = false"
@@ -130,17 +149,15 @@
         </div>
     </div>
 
-    {{-- 🌟🌟🌟 LOGIN MODAL (တစ်ခုလုံး ကွေးညွတ်ပြီး Button ပါဝင်လာသောပုံစံ) 🌟🌟🌟 --}}
+    {{-- 🌟🌟🌟 LOGIN MODAL 🌟🌟🌟 --}}
     <div x-show="showLogin" x-cloak
         class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto px-4 py-6 sm:px-0">
-        {{-- ၁။ နောက်ခံမှိန်ချမည့် Overlay --}}
         <div x-show="showLogin" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" class="fixed inset-0 transform transition-all backdrop-blur-sm"
             style="background-color: rgba(0, 0, 0, 0.65) !important;" @click="showLogin = false"></div>
 
-        {{-- ၂။ Login Form Card (တစ်ခုလုံး၏ Box ကို 32px ကြီးများဖြင့် အသေသတ်လှပစွာ ဝိုင်းကွေးထားပါသည်) --}}
         <div x-show="showLogin" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -149,10 +166,8 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             class="bg-white shadow-2xl transform transition-all sm:w-full sm:max-w-md border border-gray-100 z-[101]"
             style="border-radius: 32px !important; overflow: hidden;">
-            {{-- Padding အားလုံးကို တွန်းမထုတ်ဘဲ Card အတွင်းမှာ သပ်သပ်ရပ်ရပ်ရှိနေအောင် ထိန်းထားပါသည် --}}
             <div class="p-8 sm:p-10">
 
-                {{-- Header & Close Button --}}
                 <div class="flex justify-between items-center mb-8">
                     <h3 class="text-2xl font-black text-gray-900 tracking-wide">အကောင့်ဝင်ရန်</h3>
                     <button @click="showLogin = false"
@@ -164,7 +179,6 @@
                     </button>
                 </div>
 
-                {{-- Form --}}
                 <form method="POST" action="{{ route('login') }}" class="space-y-6">
                     @csrf
 
