@@ -4,10 +4,23 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <!-- Dashboard Link -->
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                        {{ __('Dashboard') }}
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex sm:items-center gap-3">
+                    <!-- Logo SVG (Size သီးသန့်ထိန်းထားသည်) -->
+                    <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center">
+                        <svg class="w-full h-full text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 2zm0 3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm1.2 4.14A3.48 3.48 0 0 0 12 9a3.48 3.48 0 0 0-1.2.64L12 14l1.2-4.36zM12 15c-1.66 0-3-1.34-3-3l1.35-4.86c.15-.55.65-.94 1.23-.94s1.08.39 1.23.94L14.35 12c0 1.66-1.34 3-3 3zm-4.5 3h9l-1-2.5h-7l-1 2.5zm-2.5 3h14l-1-2.5h-12l-1 2.5z" />
+                        </svg>
+                    </div>
+
+                    <!-- Home Link -->
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')"
+                        class="hover:text-orange-500 transition-colors duration-200 border-none !p-0">
+                        <div class="flex flex-col items-start justify-center">
+                            <span class="font-bold text-base leading-tight text-gray-800 tracking-wide">Pagoda</span>
+                            <span class="text-[10px] text-gray-500 font-semibold tracking-wider">Digital
+                                Directory</span>
+                        </div>
                     </x-nav-link>
                 </div>
             </div>

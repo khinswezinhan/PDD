@@ -11,10 +11,10 @@
 
         {{-- Header Section --}}
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Users List</h3>
+            <h3 class="text-2xl font-bold text-gray-800">Users List</h3>
             <a href="{{ route('admin.users.create') }}"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition shadow text-sm">
-                Create User
+                class="btn text-white px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center gap-2 orange-btn">
+                <span>Create User</span>
             </a>
         </div>
 
@@ -49,7 +49,7 @@
                 {{-- Action Buttons --}}
                 <div style="display: flex; gap: 8px;">
                     <button type="submit"
-                        style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: #1f2937; border-radius: 8px; cursor: pointer;">
+                        style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
                         Filter
                     </button>
                     @if (request()->filled('search') || request()->filled('role_id'))
@@ -64,96 +64,85 @@
         </div>
 
         {{-- Table Section --}}
-        <div
-            class="w-full bg-white dark:bg-gray-800 shadow-md rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-            <div class="overflow-x-auto w-full">
-                <table class="w-full min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-left table-auto">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
-                        <tr>
-                            <th
-                                class="px-6 py-3 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                No</th>
-                            <th
-                                class="px-6 py-3 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Name</th>
-                            <th
-                                class="px-6 py-3 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Role</th>
-                            <th
-                                class="px-6 py-3 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Email</th>
-                            <th class="px-6 py-3 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-right whitespace-nowrap"
-                                width="120">Action</th>
+        <div class="card border border-light-subtle shadow-sm rounded-3 overflow-hidden bg-white">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light border-bottom border-secondary-subtle">
+                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">
+                            <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">No</th>
+                            <th scope="col" class="py-3 ps-3">Name</th>
+                            <th scope="col" class="py-3 ps-3">Role</th>
+                            <th scope="col" class="py-3 ps-3">Email</th>
+                            <th scope="col" class="py-3 text-end pe-4" style="width: 240px;">Actions</th>
                         </tr>
                     </thead>
 
-                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody>
                         @forelse ($users as $index => $user)
-                            {{-- Status inactive ဖြစ်ရင် Text အရောင်တွေကို မှိန်ပေးမည် --}}
-                            <tr
-                                class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition {{ $user->status !== 'active' ? 'text-gray-400 dark:text-gray-500' : '' }}">
-
+                            <tr class="border-bottom border-light">
                                 {{-- No --}}
-                                <td
-                                    class="px-6 py-4 text-sm {{ $user->status !== 'active' ? 'text-gray-400' : 'text-gray-900 dark:text-gray-100' }} whitespace-nowrap">
+                                <td class="ps-4 py-3 text-center fw-normal text-muted" style="font-size: 0.9rem;">
                                     {{ $users->firstItem() + $index }}
                                 </td>
 
                                 {{-- Name --}}
-                                <td
-                                    class="px-6 py-4 text-sm font-medium {{ $user->status !== 'active' ? 'text-gray-400' : 'text-gray-950 dark:text-white' }} whitespace-nowrap">
-                                    {{ $user->name }}
+                                <td class="ps-3 py-3">
+                                    <span class="fw-normal text-secondary" style="font-size: 0.9rem;">
+                                        {{ $user->name }}
+                                    </span>
                                 </td>
 
-                                {{-- Role --}}
-                                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-semibold rounded-full {{ $user->status !== 'active' ? 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500' : 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' }}">
+                                {{-- Role (ရောင်စုံ Badge ဖြုတ်ထားသည်) --}}
+                                <td class="ps-3 py-3">
+                                    <span class="fw-normal text-secondary" style="font-size: 0.9rem;">
                                         {{ $user->role?->role_name ?? 'No Role' }}
                                     </span>
                                 </td>
 
                                 {{-- Email --}}
-                                <td
-                                    class="px-6 py-4 text-sm {{ $user->status !== 'active' ? 'text-gray-400' : 'text-gray-500 dark:text-gray-400' }} whitespace-nowrap">
-                                    {{ $user->email }}
+                                <td class="ps-3 py-3">
+                                    <span class="fw-normal text-secondary" style="font-size: 0.9rem;">
+                                        {{ $user->email }}
+                                    </span>
                                 </td>
 
                                 {{-- Action Buttons --}}
-                                <td class="px-6 py-4 text-sm text-right space-x-3 whitespace-nowrap">
+                                <td class="text-end pe-4 py-3">
+                                    <div class="d-flex justify-content-end align-items-center gap-2">
 
-                                    {{-- Edit Button (Active မဟုတ်ရင် မှိန်သွားမည်၊ နှိပ်လို့မရပါ) --}}
-                                    @if ($user->status === 'active')
-                                        <a href="{{ route('admin.users.edit', $user) }}"
-                                            class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 font-medium inline-block">
-                                            <i class="fa-solid fa-pen-to-square text-base"></i>
-                                        </a>
-                                    @else
-                                        <span class="text-gray-300 dark:text-gray-600 cursor-not-allowed inline-block"
-                                            title="User is inactive (Cannot Edit)">
-                                            <i class="fa-solid fa-pen-to-square text-base"></i>
-                                        </span>
-                                    @endif
+                                        {{-- Edit Button --}}
+                                        @if ($user->status === 'active')
+                                            <a href="{{ route('admin.users.edit', $user) }}"
+                                                class="text-warning fs-5 d-inline-block" title="Edit User">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @else
+                                            <span class="text-secondary opacity-50 fs-5 d-inline-block cursor-not-allowed"
+                                                title="User is inactive (Cannot Edit)">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                        @endif
 
-                                    {{-- Delete Button (အမြဲတမ်း ပုံမှန်လင်းပြီး အလုပ်လုပ်မည်) --}}
-                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
-                                        class="inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 font-medium inline-block alignment-middle"
-                                            onclick="return confirm('Are you sure?')">
-                                            <i class="fa-solid fa-trash text-base"></i>
-                                        </button>
-                                    </form>
+                                        {{-- Delete Button --}}
+                                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
+                                            class="m-0 d-inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="text-danger fs-5 border-0 bg-transparent p-0 d-inline-block"
+                                                title="Delete User" onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
 
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">
-                                    <i class="fa-solid fa-user-slash mb-2 text-xl block"></i>
-                                    No users found matching the criteria.
+                                <td colspan="5" class="text-center py-5 text-muted">
+                                    <i class="fas fa-user-slash fa-2x mb-3 text-black-50 d-block"></i>
+                                    <span>No users found matching the criteria.</span>
                                 </td>
                             </tr>
                         @endforelse
@@ -161,10 +150,53 @@
                 </table>
             </div>
         </div>
+    </div>
+    </div>
 
-        {{-- Pagination Links --}}
-        <div class="mt-4 px-2">
-            {{ $users->links() }}
+    {{-- Pagination Links --}}
+    @if ($users->total() > 4)
+        <div
+            class="card-footer bg-white border-top border-light-subtle d-flex justify-content-between align-items-center py-2 px-4">
+
+            <div class="text-muted small" style="font-size: 0.8rem;">
+                Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} entries
+            </div>
+
+            <nav>
+                <ul class="pagination pagination-sm m-0">
+                    {{-- Previous Link --}}
+                    @if ($users->onFirstPage())
+                        <li class="page-item disabled"><span class="page-link">&lsaquo;</span></li>
+                    @else
+                        <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}"
+                                rel="prev">&lsaquo;</a></li>
+                    @endif
+
+                    {{-- Page Numbers --}}
+                    @foreach (range(1, min(4, $users->lastPage())) as $i)
+                        @if ($i == $users->currentPage())
+                            <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link"
+                                    href="{{ $users->url($i) }}">{{ $i }}</a></li>
+                        @endif
+                    @endforeach
+
+                    @if ($users->lastPage() > 4)
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    @endif
+
+                    {{-- Next Link --}}
+                    @if ($users->hasMorePages())
+                        <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}"
+                                rel="next">&rsaquo;</a></li>
+                    @else
+                        <li class="page-item disabled"><span class="page-link">&rsaquo;</span></li>
+                    @endif
+                </ul>
+            </nav>
+
         </div>
+    @endif
     </div>
 @endsection

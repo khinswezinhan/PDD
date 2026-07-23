@@ -3,7 +3,7 @@
     {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN လှမ်းချိတ်ပေးထားပါတယ် --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <div class="container pt-2 mt-3" style="max-width: 1140px;">
+    <div class="container py-2" style="max-width: 1140px;">
 
         {{-- Success Message Alert --}}
         @if (session('success'))
@@ -21,8 +21,8 @@
                 <h4 class="fw-bold text-dark fs-4 m-0" style="letter-spacing: -0.5px;">တိုင်းဒေသကြီးနှင့်ပြည်နယ်များ</h4>
             </div>
             <a href="{{ route('admin.divisions.create') }}"
-                class="btn btn-primary px-3 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center">
-                တိုင်းဒေသကြီး/ပြည်နယ် အသစ်ထည့်ရန်
+                class="btn text-white px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center gap-2 orange-btn">
+                <span>တိုင်းဒေသကြီး/ပြည်နယ်အသစ်ထည့်ရန်</span>
             </a>
         </div>
 
@@ -60,8 +60,7 @@
                 {{-- Action Buttons --}}
                 <div class="col-12 col-md-auto d-flex gap-2">
                     <button type="submit"
-                        class="btn btn-secondary px-3 rounded-2 fw-semibold d-inline-flex align-items-center"
-                        style="height: 38px; font-size: 0.9rem;">
+                        style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
                         Filter
                     </button>
 
@@ -94,11 +93,11 @@
                         @forelse ($divisions as $key => $division)
                             <tr class="border-bottom border-light">
                                 <!-- <td> ထဲက py-3 တွေကို py-2 ပြောင်းလိုက်လို့ အကွက်တွေ သေးသွားပါပြီ -->
-                                <td class="ps-4 py-2 text-center fw-semibold text-muted" style="font-size: 0.85rem;">
+                                <td class="ps-4 py-2 text-center fw-normal text-muted" style="font-size: 0.85rem;">
                                     {{ ($divisions->currentPage() - 1) * $divisions->perPage() + $key + 1 }}
                                 </td>
                                 <td class="ps-3 py-2">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 0.95rem;">
+                                    <span class="fw-normal text-secondary-emphasis" style="font-size: 0.95rem;">
                                         {{ $division->name }}
                                     </span>
                                 </td>
@@ -116,9 +115,8 @@
                                     <div class="d-flex justify-content-end gap-2">
                                         {{-- Edit Button --}}
                                         <a href="{{ route('admin.divisions.edit', $division->id) }}"
-                                            class="btn btn-sm btn-outline-primary px-2 py-1 rounded-2 d-inline-flex align-items-center fw-medium"
-                                            style="font-size: 0.8rem;">
-                                            <i class="fas fa-edit me-1 small"></i>
+                                            class="text-warning fs-5 d-inline-block" title="Edit User">
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -136,16 +134,53 @@
                 </table>
             </div>
 
-            {{-- Card Footer (စာမျက်နှာအလိုက်ပြသမှયအပိုင်း) --}}
             <div
                 class="card-footer bg-white border-top border-light-subtle d-flex justify-content-between align-items-center py-2 px-4">
+
+                {{-- ဘယ်ဘက်ခြမ်း: စာသားသီးသန့် --}}
                 <div class="text-muted small" style="font-size: 0.8rem;">
                     Showing {{ $divisions->firstItem() }} to {{ $divisions->lastItem() }} of {{ $divisions->total() }}
                     entries
                 </div>
-                <div>
-                    {{ $divisions->links() }}
-                </div>
+
+                {{-- ညာဘက်ခြမ်း: Custom Pagination ($divisions အတွက်) --}}
+                <nav>
+                    <ul class="pagination pagination-sm m-0">
+
+                        {{-- Previous Page Link --}}
+                        @if ($divisions->onFirstPage())
+                            <li class="page-item disabled"><span class="page-link">&lsaquo;</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link" href="{{ $divisions->previousPageUrl() }}"
+                                    rel="prev">&lsaquo;</a></li>
+                        @endif
+
+                        {{-- Page 1, 2, 3, 4 ပြသခြင်း --}}
+                        @foreach (range(1, min(4, $divisions->lastPage())) as $i)
+                            @if ($i == $divisions->currentPage())
+                                <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $divisions->url($i) }}">{{ $i }}</a></li>
+                            @endif
+                        @endforeach
+
+                        {{-- စာမျက်နှာ ၄ ခုထက်ပိုပါက ... ပြသခြင်း --}}
+                        @if ($divisions->lastPage() > 4)
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        @endif
+
+                        {{-- Next Page Link --}}
+                        @if ($divisions->hasMorePages())
+                            <li class="page-item"><a class="page-link" href="{{ $divisions->nextPageUrl() }}"
+                                    rel="next">&rsaquo;</a></li>
+                        @else
+                            <li class="page-item disabled"><span class="page-link">&rsaquo;</span></li>
+                        @endif
+
+                    </ul>
+                </nav>
+
             </div>
         </div>
 

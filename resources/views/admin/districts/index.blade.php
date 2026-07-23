@@ -4,7 +4,7 @@
     {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN လှမ်းချိတ်ပေးထားပါတယ် --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <div class="container py-5" style="max-width: 1140px;">
+    <div class="container py-2" style="max-width: 1140px;">
 
         {{-- Success Message Alert --}}
         @if (session('success'))
@@ -23,8 +23,8 @@
                 <h4 class="fw-bold text-dark fs-4 m-0" style="letter-spacing: -0.5px;">ခရိုင်များ</h4>
             </div>
             <a href="{{ route('admin.districts.create') }}"
-                class="btn btn-primary px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center">
-                ခရိုင်အသစ်ထည့်ရန်
+                class="btn text-white px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center gap-2 orange-btn">
+                <span>ခရိုင်အသစ်ထည့်ရန်</span>
             </a>
         </div>
 
@@ -43,7 +43,7 @@
                         </span>
                         <input type="text" name="search" value="{{ request('search') }}"
                             class="form-control ps-5 border border-secondary-subtle rounded-2"
-                            placeholder="ခရိုင်အမည်ြဖင့်ရှာရန်" style="height: 38px; font-size: 0.9rem;">
+                            placeholder="ခရိုင်အမည်ဖြင့်ရှာရန်" style="height: 38px; font-size: 0.9rem;">
                     </div>
                 </div>
 
@@ -64,8 +64,7 @@
                 {{-- Action Buttons --}}
                 <div class="col-12 col-md-auto d-flex gap-2">
                     <button type="submit"
-                        class="btn btn-secondary px-3 rounded-2 fw-semibold d-inline-flex align-items-center"
-                        style="height: 38px; font-size: 0.9rem;">
+                        style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
                         Filter
                     </button>
 
@@ -95,16 +94,16 @@
                     <tbody>
                         @forelse ($districts as $key => $district)
                             <tr class="border-bottom border-light">
-                                <td class="ps-4 py-3 text-center fw-semibold text-muted" style="font-size: 0.9rem;">
+                                <td class="ps-4 py-3 text-center fw-normal text-muted" style="font-size: 0.9rem;">
                                     {{ ($districts->currentPage() - 1) * $districts->perPage() + $key + 1 }}
                                 </td>
                                 <td class="ps-3 py-3">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 1rem;">
+                                    <span class="fw-normal text-secondary-emphasis" style="font-size: 1rem;">
                                         {{ $district->name }}
                                     </span>
                                 </td>
                                 <td class="ps-3 py-3">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 1rem;">
+                                    <span class="fw-normal text-secondary-emphasis" style="font-size: 1rem;">
                                         {{ $district->division->name ?? 'N/A' }}
                                     </span>
                                 </td>
@@ -112,8 +111,8 @@
                                     <div class="d-flex justify-content-end gap-2">
                                         {{-- Edit Button --}}
                                         <a href="{{ route('admin.districts.edit', $district->id) }}"
-                                            class="btn btn-sm btn-outline-primary px-3 rounded-2 d-inline-flex align-items-center fw-medium">
-                                            <i class="fas fa-edit me-1 small"></i> ပြင်ဆင်ရန်
+                                            class="text-warning fs-5 d-inline-block" title="Edit User">
+                                            <i class="fas fa-edit"></i>
                                         </a>
 
                                         {{-- Delete Button (အလုပ်လုပ်အောင် Comment ပြန်ဖွင့်ပေးထားပါတယ်) --}}
@@ -146,14 +145,51 @@
             @if ($districts->hasPages())
                 <div
                     class="card-footer bg-white border-top border-light-subtle d-flex justify-content-between align-items-center py-3 px-4">
+
+                    {{-- ဘယ်ဘက်ခြမ်း: စာသားသီးသန့် --}}
                     <div class="text-muted small">
                         Showing {{ $districts->firstItem() }} to {{ $districts->lastItem() }} of
-                        {{ $districts->total() }}
-                        entries
+                        {{ $districts->total() }} entries
                     </div>
-                    <div>
-                        {{ $districts->links() }}
-                    </div>
+
+                    {{-- ညာဘက်ခြမ်း: 1 2 3 4 ... Custom Pagination --}}
+                    <nav>
+                        <ul class="pagination pagination-sm m-0">
+
+                            {{-- Previous Page Link --}}
+                            @if ($districts->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">&lsaquo;</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $districts->previousPageUrl() }}"
+                                        rel="prev">&lsaquo;</a></li>
+                            @endif
+
+                            {{-- Page 1, 2, 3, 4 ပြသခြင်း --}}
+                            @foreach (range(1, min(4, $districts->lastPage())) as $i)
+                                @if ($i == $districts->currentPage())
+                                    <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $districts->url($i) }}">{{ $i }}</a></li>
+                                @endif
+                            @endforeach
+
+                            {{-- စာမျက်နှာ ၄ ခုထက်ပိုပါက ... ပြသခြင်း --}}
+                            @if ($districts->lastPage() > 4)
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            @endif
+
+                            {{-- Next Page Link --}}
+                            @if ($districts->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $districts->nextPageUrl() }}"
+                                        rel="next">&rsaquo;</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">&rsaquo;</span></li>
+                            @endif
+
+                        </ul>
+                    </nav>
+
                 </div>
             @endif
         </div>

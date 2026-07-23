@@ -4,7 +4,7 @@
     {{-- Icons လေးတွေလှနေစေဖို့ FontAwesome CDN --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <div class="container py-5" style="max-width: 1140px;">
+    <div class="container py-2" style="max-width: 1140px;">
 
         {{-- Success Message Alert --}}
         @if (session('success'))
@@ -23,8 +23,8 @@
                 <h4 class="fw-bold text-dark fs-4 m-0" style="letter-spacing: -0.5px;">မြို့နယ်များ</h4>
             </div>
             <a href="{{ route('admin.townships.create') }}"
-                class="btn btn-primary px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center">
-                မြို့နယ်အသစ်ထည့်ရန်
+                class="btn text-white px-4 py-2 shadow-sm rounded-2 fw-semibold d-inline-flex align-items-center gap-2 orange-btn">
+                <span>မြို့နယ်အသစ်ထည့်ရန်</span>
             </a>
         </div>
 
@@ -77,8 +77,7 @@
                 {{-- Action Buttons --}}
                 <div class="col-12 col-md-auto d-flex gap-2">
                     <button type="submit"
-                        class="btn btn-secondary px-3 rounded-2 fw-semibold d-inline-flex align-items-center"
-                        style="height: 38px; font-size: 0.9rem;">
+                        style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
                         Filter
                     </button>
 
@@ -110,29 +109,30 @@
                     <tbody>
                         @forelse ($townships as $key => $township)
                             <tr class="border-bottom border-light">
-                                <td class="ps-4 py-3 text-center fw-semibold text-muted" style="font-size: 0.9rem;">
+                                <td class="ps-4 py-3 text-center fw-normal text-muted" style="font-size: 0.9rem;">
                                     {{ ($townships->currentPage() - 1) * $townships->perPage() + $key + 1 }}
                                 </td>
                                 <td class="ps-3 py-3">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 1rem;">
+                                    <span class="fw-normal text-secondary-emphasis" style="font-size: 1rem;">
                                         {{ $township->name }}
                                     </span>
                                 </td>
                                 <td class="ps-3 py-3">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 1rem;">
+                                    <span class="fw-normal text-secondary-emphasis" style="font-size: 1rem;">
                                         {{ $township->district->name ?? 'N/A' }}
                                     </span>
                                 </td>
                                 <td class="ps-3 py-3">
-                                    <span class="fw-bold text-secondary-emphasis" style="font-size: 1rem;">
+                                    <span class="fw-normal text-secondary-emphasis" style="font-size: 1rem;">
                                         {{ $township->district->division->name ?? 'N/A' }}
                                     </span>
                                 </td>
                                 <td class="text-end pe-4 py-3">
                                     <div class="d-flex justify-content-end gap-2">
+                                        {{-- Edit Button --}}
                                         <a href="{{ route('admin.townships.edit', $township->id) }}"
-                                            class="btn btn-sm btn-outline-primary px-3 rounded-2 d-inline-flex align-items-center fw-medium">
-                                            <i class="fas fa-edit me-1 small"></i> ပြင်ဆင်ရန်
+                                            class="text-warning fs-5 d-inline-block" title="Edit User">
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -150,18 +150,54 @@
                 </table>
             </div>
 
-            @if ($townships->hasPages())
-                <div
-                    class="card-footer bg-white border-top border-light-subtle d-flex justify-content-between align-items-center py-3 px-4">
-                    <div class="text-muted small">
-                        Showing {{ $townships->firstItem() }} to {{ $townships->lastItem() }} of
-                        {{ $townships->total() }} entries
-                    </div>
-                    <div>
-                        {{ $townships->appends(request()->query())->links() }}
-                    </div>
+            <div
+                class="card-footer bg-white border-top border-light-subtle d-flex justify-content-between align-items-center py-2 px-4">
+
+                {{-- ဘယ်ဘက်ခြမ်း: စာသားသီးသန့် --}}
+                <div class="text-muted small" style="font-size: 0.8rem;">
+                    Showing {{ $townships->firstItem() }} to {{ $townships->lastItem() }} of {{ $townships->total() }}
+                    entries
                 </div>
-            @endif
+
+                {{-- ညာဘက်ခြမ်း: Custom Pagination ($townships အတွက်) --}}
+                <nav>
+                    <ul class="pagination pagination-sm m-0">
+
+                        {{-- Previous Page Link --}}
+                        @if ($townships->onFirstPage())
+                            <li class="page-item disabled"><span class="page-link">&lsaquo;</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link" href="{{ $townships->previousPageUrl() }}"
+                                    rel="prev">&lsaquo;</a></li>
+                        @endif
+
+                        {{-- Page 1, 2, 3, 4 ပြသခြင်း --}}
+                        @foreach (range(1, min(4, $townships->lastPage())) as $i)
+                            @if ($i == $townships->currentPage())
+                                <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $townships->url($i) }}">{{ $i }}</a></li>
+                            @endif
+                        @endforeach
+
+                        {{-- စာမျက်နှာ ၄ ခုထက်ပိုပါက ... ပြသခြင်း --}}
+                        @if ($townships->lastPage() > 4)
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        @endif
+
+                        {{-- Next Page Link --}}
+                        @if ($townships->hasMorePages())
+                            <li class="page-item"><a class="page-link" href="{{ $townships->nextPageUrl() }}"
+                                    rel="next">&rsaquo;</a></li>
+                        @else
+                            <li class="page-item disabled"><span class="page-link">&rsaquo;</span></li>
+                        @endif
+
+                    </ul>
+                </nav>
+
+            </div>
         </div>
 
     </div>
