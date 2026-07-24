@@ -1,18 +1,18 @@
-{{-- 🌟 x-data တွင် activeTab ကို ပုံသေမထားဘဲ အစတွင် အလွတ်ထားကာ x-init ဖြင့် စစ်ဆေးပေးပါမည် --}}
-<nav x-data="{ open: false, showLogin: false, activeTab: '' }" x-init="activeTab = window.location.hash || ''" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+{{-- 🌟 မီနူးစာသားများကို အနက်ရောင်သို့ ပြောင်းလဲထားပါသည် --}}
+<nav x-data="{ open: false, showLogin: false, activeTab: '' }" x-init="activeTab = window.location.hash ? window.location.hash : ''" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 gap-4">
 
             {{-- 1. Logo & Desktop Navigation --}}
             <div class="flex items-center gap-10 flex-shrink-0">
                 <a href="{{ url('/') }}" class="flex items-center gap-3 decoration-none">
-                    <svg class="h-10 w-10 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-10 w-10 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M12 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 2zm0 3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm1.2 4.14A3.48 3.48 0 0 0 12 9a3.48 3.48 0 0 0-1.2.64L12 14l1.2-4.36zM12 15c-1.66 0-3-1.34-3-3l1.35-4.86c.15-.55.65-.94 1.23-.94s1.08.39 1.23.94L14.35 12c0 1.66-1.34 3-3 3zm-4.5 3h9l-1-2.5h-7l-1 2.5zm-2.5 3h14l-1-2.5h-12l-1 2.5z" />
                     </svg>
                     <div class="leading-tight">
-                        <span class="font-bold text-xl block text-gray-800 tracking-wide">Pagoda</span>
-                        <span class="text-xs text-gray-500 block font-semibold">Digital Directory</span>
+                        <span class="font-bold text-xl block text-gray-900 tracking-wide">Pagoda</span>
+                        <span class="text-xs text-orange-500 block font-semibold">Digital Directory</span>
                     </div>
                 </a>
 
@@ -51,7 +51,7 @@
                     <form action="#" method="GET" id="searchForm"
                         class="m-0 w-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out flex items-center w-full justify-end">
                         <div
-                            class="flex items-center w-full min-w-[200px] sm:min-w-[320px] md:max-w-[540px] lg:max-w-[1000px] bg-white rounded-full px-6 py-3 border-2 border-orange-500 focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-600 shadow-sm">
+                            class="flex items-center w-full min-w-[200px] sm:min-w-[320px] md:max-w-[540px] lg:max-w-[1000px] bg-gray-50 rounded-full px-6 py-3 border-2 border-orange-400 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20 shadow-sm">
 
                             <div class="text-gray-400 flex-shrink-0 flex items-center justify-center">
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -68,7 +68,7 @@
                     </form>
 
                     <button type="button" id="searchBtn"
-                        class="p-2 text-gray-600 hover:text-orange-500 hover:bg-gray-50 rounded-full transition duration-150 focus:outline-none flex-shrink-0">
+                        class="p-2 text-gray-900 hover:text-orange-500 hover:bg-orange-50 rounded-full transition duration-150 focus:outline-none flex-shrink-0">
                         <svg id="searchIcon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -81,17 +81,17 @@
                 <div class="hidden sm:flex sm:items-center flex-shrink-0">
                     @auth
                         <a href="{{ route('admin.dashboard') }}"
-                            class="text-sm font-bold text-gray-900 hover:text-gray-600 px-3 py-2 rounded-md hover:bg-gray-50 transition decoration-none">Dashboard</a>
+                            class="text-sm font-bold text-gray-900 hover:text-orange-500 px-3 py-2 rounded-md hover:bg-orange-50 transition decoration-none">Dashboard</a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit"
-                                class="text-sm font-bold text-red-600 hover:text-red-800 px-3 py-2 rounded-md hover:bg-red-50 transition">Log
+                                class="text-sm font-bold text-red-500 hover:text-white px-3 py-2 rounded-md hover:bg-red-600 transition">Log
                                 Out</button>
                         </form>
                     @else
-                        {{-- Login Button --}}
+                        {{-- Login Button (Orange Icon) --}}
                         <a href="#" @click.prevent="showLogin = true"
-                            class="p-1.5 text-gray-600 hover:text-orange-500 hover:bg-gray-50 rounded-full transition duration-150 focus:outline-none inline-flex items-center justify-center">
+                            class="p-1.5 text-orange-500 hover:bg-orange-50 rounded-full transition duration-150 focus:outline-none inline-flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="h-7 w-7 text-orange-500">
                                 <path fill-rule="evenodd"
@@ -105,7 +105,7 @@
                 {{-- Mobile Menu Button --}}
                 <div class="flex items-center sm:hidden flex-shrink-0">
                     <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-orange-500 hover:bg-orange-50 focus:outline-none transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -123,26 +123,26 @@
 
     {{-- Mobile Navigation Links --}}
     <div :class="{ 'block': open, 'hidden': !open }"
-        class="hidden sm:hidden bg-gray-50 border-t border-gray-200 max-h-[calc(100vh-80px)] overflow-y-auto">
+        class="hidden sm:hidden bg-white border-t border-gray-100 max-h-[calc(100vh-80px)] overflow-y-auto shadow-lg">
         <div class="pt-2 pb-3 space-y-1 px-4">
             <a href="{{ url('/#regions-pagodas') }}" 
                 @click="activeTab = '#regions-pagodas'; open = false"
-                :class="activeTab === '#regions-pagodas' ? 'border-orange-500 text-orange-500 bg-orange-50/50' : 'border-transparent text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500'"
+                :class="activeTab === '#regions-pagodas' ? 'border-orange-500 text-orange-500 bg-orange-50' : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-orange-500'"
                 class="block pl-3 pr-4 py-2.5 border-l-4 text-base font-extrabold decoration-none">တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ</a>
             
             <a href="{{ url('/#famous-pagodas') }}" 
                 @click="activeTab = '#famous-pagodas'; open = false"
-                :class="activeTab === '#famous-pagodas' ? 'border-orange-500 text-orange-500 bg-orange-50/50' : 'border-transparent text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500'"
+                :class="activeTab === '#famous-pagodas' ? 'border-orange-500 text-orange-500 bg-orange-50' : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-orange-500'"
                 class="block pl-3 pr-4 py-2.5 border-l-4 text-base font-extrabold decoration-none">တန်ခိုးကြီးဘုရားများ</a>
             
             <a href="{{ url('/#contact') }}" 
                 @click="activeTab = '#contact'; open = false"
-                :class="activeTab === '#contact' ? 'border-orange-500 text-orange-500 bg-orange-50/50' : 'border-transparent text-gray-900 hover:bg-gray-100 hover:border-orange-500 hover:text-orange-500'"
+                :class="activeTab === '#contact' ? 'border-orange-500 text-orange-500 bg-orange-50' : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-orange-500'"
                 class="block pl-3 pr-4 py-2.5 border-l-4 text-base font-extrabold decoration-none">ဆက်သွယ်ရန်</a>
 
             @guest
                 <a href="#" @click.prevent="showLogin = true; open = false"
-                    class="block pl-3 pr-4 py-2.5 border-l-4 border-transparent text-base font-extrabold text-orange-600 hover:bg-orange-50 hover:border-orange-500 decoration-none">အကောင့်ဝင်ရန်
+                    class="block pl-3 pr-4 py-2.5 border-l-4 border-transparent text-base font-extrabold text-gray-900 hover:bg-orange-50 hover:text-orange-500 decoration-none">အကောင့်ဝင်ရန်
                     (Login)
                 </a>
             @endguest

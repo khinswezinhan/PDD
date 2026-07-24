@@ -18,45 +18,38 @@
             display: inline-block;
         }
         
-        /* Pagination Links နှင့် Buttons များအတွက် ပုံမှန်အရောင် (Background နဲ့ Text ပါ ဖြည့်ပေးထားသည်) */
+        /* Pagination Links နှင့် Buttons များအတွက် ပုံမှန်အရောင် */
         .custom-pagination-wrapper nav a,
         .custom-pagination-wrapper nav button,
         .custom-pagination-wrapper nav span:not([aria-current="page"]):not([aria-disabled="true"]) span,
         .famous-pagination-wrapper nav a,
         .famous-pagination-wrapper nav button,
         .famous-pagination-wrapper nav span:not([aria-current="page"]):not([aria-disabled="true"]) span {
-            color: #1f2937 !important;          /* စာသားအရောင် အမည်းရောင် */
-            background-color: #ffffff !important;  /* နောက်ခံ အဖြူရောင် */
-            border-color: #d1d5db !important;      /* ဘောင် မီးခိုးရောင် */
+            color: #1f2937 !important;        
+            background-color: #ffffff !important;  
+            border-color: #d1d5db !important;      
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
 
-        /* Regions Active Page (Orange) */
-        .custom-pagination-wrapper nav span[aria-current="page"] span,
-        .custom-pagination-wrapper nav span[aria-current="page"] button {
+        /* 🌟 Active Page များကို လိမ္မော်ရောင်အဖြစ် သတ်မှတ်ခြင်း */
+        .custom-pagination-wrapper nav [aria-current="page"] span,
+        .custom-pagination-wrapper nav [aria-current="page"] button,
+        .famous-pagination-wrapper nav [aria-current="page"] span,
+        .famous-pagination-wrapper nav [aria-current="page"] button,
+        .custom-pagination-wrapper nav span.bg-blue-600,
+        .famous-pagination-wrapper nav span.bg-blue-600 {
             background-color: #f97316 !important;
             border-color: #f97316 !important;
-            color: white !important;
+            color: #ffffff !important;
         }
+
         .custom-pagination-wrapper nav a:hover,
-        .custom-pagination-wrapper nav button:hover {
+        .custom-pagination-wrapper nav button:hover,
+        .famous-pagination-wrapper nav a:hover,
+        .famous-pagination-wrapper nav button:hover {
             background-color: #fff7ed !important;
             color: #ea580c !important;
             border-color: #fdba74 !important;
-        }
-
-        /* Famous Pagodas Active Page (Cyan) */
-        .famous-pagination-wrapper nav span[aria-current="page"] span,
-        .famous-pagination-wrapper nav span[aria-current="page"] button {
-            background-color: #0891b2 !important;
-            border-color: #0891b2 !important;
-            color: white !important;
-        }
-        .famous-pagination-wrapper nav a:hover,
-        .famous-pagination-wrapper nav button:hover {
-            background-color: #ecfeff !important;
-            color: #0e7490 !important;
-            border-color: #7dd3fc !important;
         }
 
         /* မနှိပ်နိုင်သေးသော Disabled ခလုတ်များ (Previous / Next) အတွက် အရောင် */
@@ -137,10 +130,8 @@
     {{-- တိုင်းဒေသကြီး/ပြည်နယ်ရှိဘုရားများ ကဏ္ဍ --}}
     <section id="regions-pagodas" class="max-w-7xl mx-auto pt-8 pb-6 scroll-mt-24">
         <div class="text-center mb-10">
-            <!-- ဤနေရာတွင် text-orange-500 အဖြစ်ပြောင်းလဲပေးထားပါသည် -->
             <h2 class="text-2xl font-bold text-orange-500 tracking-tight">တိုင်းဒေသကြီး၊ ပြည်နယ်ရှိဘုရားများ</h2>
-            <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက်
-                စေတီပုထိုးများ</p>
+            <p class="mt-2 text-sm text-gray-500">မြန်မာနိုင်ငံအနှံ့အပြားရှိ တိုင်းဒေသကြီးနှင့် ပြည်နယ်အလိုက် စေတီပုထိုးများ</p>
         </div>
 
         {{-- AJAX Container for Regions --}}
@@ -152,7 +143,6 @@
                         <div>
                             <a href="{{ route('division.show', $division->id) }}"
                                 class="block h-40 bg-gray-100 relative overflow-hidden">
-                               
                                 <img src="{{ asset($division->photo) }}" alt="{{ $division->photo }}"
                                     class="w-full h-full object-cover hover:scale-105 transition duration-300">
                             </a>
@@ -199,7 +189,6 @@
     <section id="famous-pagodas" class="max-w-7xl mx-auto pt-6 pb-16 scroll-mt-24 border-t border-gray-100">
         <div class="text-center mb-10">
             <h2 class="text-2xl font-bold tracking-tight">
-                <!-- ဤနေရာတွင် text-orange-500 အဖြစ်ပြောင်းလဲပေးထားပါသည် -->
                 <a href="{{ url('/#famous-pagodas') }}" class="text-orange-500 hover:text-orange-600 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
                     တန်ခိုးကြီးဘုရားများ
                 </a>
@@ -229,7 +218,8 @@
 
                             <div class="p-4">
                                 <h3 class="text-base font-bold text-gray-900 leading-snug">
-                                    <a href="{{ route('pagoda.show', $pagoda->id) }}" class="text-gray-900 hover:text-cyan-600 transition decoration-none">
+                                    {{-- 🌟 ဘုရားနာမည် hover လုပ်လျှင် လိမ္မော်ရောင်ဖြစ်ရန် hover:text-orange-500 ပြောင်းထားပါသည် --}}
+                                    <a href="{{ route('pagoda.show', $pagoda->id) }}" class="text-gray-900 hover:text-orange-500 transition decoration-none">
                                         {{ $pagoda->name }}
                                     </a>
                                 </h3>
@@ -240,7 +230,8 @@
                         </div>
                         
                         <div class="px-4 pb-4 pt-0">
-                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-orange-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
+                            {{-- 🌟 အသေးစိတ်ဖတ်ရန် hover လုပ်လျှင် လိမ္မော်ရောင်ဖြစ်ရန် hover:text-orange-500 ပြောင်းထားပါသည် --}}
+                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-orange-600 font-semibold hover:text-orange-500 text-xs decoration-none">
                                 အသေးစိတ်ဖတ်ရန် →
                             </a>
                         </div>
@@ -260,22 +251,22 @@
     </section>
 
     {{-- ဆက်သွယ်ရန် --}}
-    <section id="contact" class="bg-gray-50 py-16 scroll-mt-24 border-t border-gray-200">
+    <section id="contact" class="py-16 scroll-mt-24 bg-orange-50 border-t border-orange-100 text-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">ဆက်သွယ်ရန်</h2>
-                <p class="mt-3 text-lg text-gray-500">မေးမြန်းလိုသည်များရှိပါက အောက်ပါအတိုင်း ဆက်သွယ်နိုင်ပါသည်။</p>
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">ဆက်သွယ်ရန်</h2>
+                <p class="mt-3 text-lg text-gray-600">မေးမြန်းလိုသည်များရှိပါက အောက်ပါအတိုင်း ဆက်သွယ်နိုင်ပါသည်။</p>
             </div>
 
-            <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
-                <p class="text-gray-700 font-medium mb-4">📍 လိပ်စာ: ရန်ကုန်မြို့၊ မြန်မာနိုင်ငံ။</p>
-                <p class="text-gray-700 font-medium mb-4">📞 ဖုန်းနံပါတ်: 09-123456789</p>
-                <p class="text-gray-700 font-medium">✉️ အီးမေးလ်: info@pagodadirectory.com</p>
+            <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-orange-200 text-center">
+                <p class="text-gray-700 font-medium mb-4"> ကွန်ပျူတာတက္ကသိုလ်(ပြည်)</p>
+                <p class="text-gray-700 font-medium mb-4">ဖုန်းနံပါတ်: 09-423676551</p>
+                <p class="text-gray-700 font-medium">အီးမေးလ်: info@pagodadirectory.com</p>
             </div>
         </div>
     </section>
 
-    {{-- AJAX Script for Pagination (Both Sections) --}}
+    {{-- AJAX Script for Pagination with Login Form Shield --}}
     <script>
         document.addEventListener('click', function(e) {
             const link = e.target.closest('.custom-pagination-wrapper a');
@@ -283,33 +274,59 @@
             if (link) {
                 e.preventDefault();
                 const url = link.getAttribute('href');
+                
+                if (!url || url.includes('login')) {
+                    window.location.href = url;
+                    return;
+                }
+
                 const isFamous = link.closest('#famous-ajax-container') !== null;
 
-                fetch(url)
-                    .then(response => response.text())
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-                        
-                        if (isFamous) {
-                            const newContent = doc.querySelector('#famous-ajax-container');
-                            const oldContent = document.querySelector('#famous-ajax-container');
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    if (response.redirected && response.url.includes('login')) {
+                        window.location.href = response.url;
+                        return;
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    if (!html) return;
 
-                            if (newContent && oldContent) {
-                                oldContent.innerHTML = newContent.innerHTML;
-                                document.querySelector('#famous-pagodas').scrollIntoView({ behavior: 'smooth' });
-                            }
-                        } else {
-                            const newContent = doc.querySelector('#regions-ajax-container');
-                            const oldContent = document.querySelector('#regions-ajax-container');
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    if (doc.querySelector('form input[name="_token"]') && doc.querySelector('input[type="password"]')) {
+                        window.location.reload();
+                        return;
+                    }
 
-                            if (newContent && oldContent) {
-                                oldContent.innerHTML = newContent.innerHTML;
-                                document.querySelector('#regions-pagodas').scrollIntoView({ behavior: 'smooth' });
-                            }
+                    if (isFamous) {
+                        const newContent = doc.querySelector('#famous-ajax-container');
+                        const oldContent = document.querySelector('#famous-ajax-container');
+
+                        if (newContent && oldContent) {
+                            oldContent.innerHTML = newContent.innerHTML;
+                            document.querySelector('#famous-pagodas').scrollIntoView({ behavior: 'smooth' });
                         }
-                    })
-                    .catch(error => console.warn('Error fetching pagination:', error));
+                    } else {
+                        const newContent = doc.querySelector('#regions-ajax-container');
+                        const oldContent = document.querySelector('#regions-ajax-container');
+
+                        if (newContent && oldContent) {
+                            oldContent.innerHTML = newContent.innerHTML;
+                            document.querySelector('#regions-pagodas').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.warn('Error fetching pagination:', error);
+                    window.location.href = url;
+                });
             }
         });
     </script>
