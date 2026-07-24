@@ -3,6 +3,7 @@
         html {
             scroll-behavior: smooth;
         }
+
         /* Pagination နှင့် ခေါင်းစဉ်များ ကွက်တိဖြစ်စေမည့် Style */
         .custom-pagination-wrapper {
             margin-top: 2rem !important;
@@ -65,19 +66,18 @@
     </style>
 
     {{-- Slider Section --}}
-    <div class="pt-20 w-full"> 
-        <div x-data="{ 
-                activeSlide: 1, 
-                slides: [
-                    { id: 1, title: 'Buddhism', subtitle: 'And Meditation', desc: 'For The Modern World', image: '{{ asset('images/home1.png') }}' },
-                    { id: 2, title: 'Peace & Mind', subtitle: 'Find Inner Peace', desc: 'Discover the path of mindfulness and tranquility.', image: '{{ asset('images/home2.png') }}' },
-                    { id: 3, title: 'Digital Directory', subtitle: 'Explore Pagodas', desc: 'Locate famous pagodas across states and divisions easily.', image: '{{ asset('images/home3.png') }}' }
-                ],
-                next() { this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1 },
-                prev() { this.activeSlide = this.activeSlide === 1 ? this.slides.length : this.activeSlide - 1 }
-               }" 
-             x-init="setInterval(() => next(), 5000)" 
-             class="relative bg-gray-950 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden shadow-sm w-full">
+    <div class="pt-20 w-full">
+        <div x-data="{
+            activeSlide: 1,
+            slides: [
+                { id: 1, title: 'Buddhism', subtitle: 'And Meditation', desc: 'For The Modern World', image: '{{ asset('images/home1.png') }}' },
+                { id: 2, title: 'Peace & Mind', subtitle: 'Find Inner Peace', desc: 'Discover the path of mindfulness and tranquility.', image: '{{ asset('images/home2.png') }}' },
+                { id: 3, title: 'Digital Directory', subtitle: 'Explore Pagodas', desc: 'Locate famous pagodas across states and divisions easily.', image: '{{ asset('images/home3.png') }}' }
+            ],
+            next() { this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1 },
+            prev() { this.activeSlide = this.activeSlide === 1 ? this.slides.length : this.activeSlide - 1 }
+        }" x-init="setInterval(() => next(), 5000)" x-cloak
+            class="relative bg-gray-950 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden shadow-sm w-full">
 
             <template x-for="slide in slides" :key="slide.id">
                 <div x-show="activeSlide === slide.id" x-transition:enter="transition ease-out duration-1000"
@@ -200,18 +200,18 @@
         <div id="famous-ajax-container">
             <div class="px-6 sm:px-8 grid grid-cols-1 sm:px-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 @forelse($famousPagodas as $pagoda)
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
+                    <div
+                        class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
                         <div>
                             <div class="h-40 bg-gray-200 relative overflow-hidden">
                                 <a href="{{ route('pagoda.show', $pagoda->id) }}" class="block w-full h-full">
-                                    @if($pagoda->photo)
-                                        <img src="{{ asset($pagoda->photo) }}" 
-                                             alt="{{ $pagoda->name }}" 
-                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    @if ($pagoda->photo)
+                                        <img src="{{ asset($pagoda->photo) }}" alt="{{ $pagoda->name }}"
+                                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                     @else
-                                        <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
-                                             alt="{{ $pagoda->name }}" 
-                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                        <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda"
+                                            alt="{{ $pagoda->name }}"
+                                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                     @endif
                                 </a>
                             </div>
@@ -228,7 +228,7 @@
                                 </p>
                             </div>
                         </div>
-                        
+
                         <div class="px-4 pb-4 pt-0">
                             {{-- 🌟 အသေးစိတ်ဖတ်ရန် hover လုပ်လျှင် လိမ္မော်ရောင်ဖြစ်ရန် hover:text-orange-500 ပြောင်းထားပါသည် --}}
                             <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-orange-600 font-semibold hover:text-orange-500 text-xs decoration-none">

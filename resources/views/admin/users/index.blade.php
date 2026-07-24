@@ -50,7 +50,7 @@
                 <div style="display: flex; gap: 8px;">
                     <button type="submit"
                         style="height: 40px; font-size: 14px; padding: 0 16px; color: white; background-color: orange; border-radius: 8px; cursor: pointer;">
-                        Filter
+                        Search
                     </button>
                     @if (request()->filled('search') || request()->filled('role_id'))
                         <a href="{{ route('admin.users.index') }}"
