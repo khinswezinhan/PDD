@@ -81,28 +81,7 @@
                         </div>
                     </div>
 
-                    <section id="contact" class="bg-gray-50 py-16 scroll-mt-24 border-t border-gray-200">
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div class="text-center mb-12">
-                                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">ဆက်သွယ်ရန်</h2>
-                                <p class="mt-3 text-lg text-gray-500">မေးမြန်းလိုသည်များရှိပါက အောက်ပါအတိုင်း
-                                    ဆက်သွယ်နိုင်ပါသည်။</p>
-                            </div>
-
-                            <div
-                                class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
-                                <p class="text-gray-700 font-medium mb-4">
-                                    📍 လိပ်စာ: {{ $pagoda->address ?? 'လိပ်စာ မရှိသေးပါ' }}
-                                </p>
-                                <p class="text-gray-700 font-medium mb-4">
-                                    📞 ဖုန်းနံပါတ်: {{ $pagoda->phone ?? 'ဖုန်းနံပါတ် မရှိသေးပါ' }}
-                                </p>
-                                <p class="text-gray-700 font-medium">
-                                    ✉️ အီးမေးလ်: {{ $pagoda->email ?? 'အီးမေးလ် မရှိသေးပါ' }}
-                                </p>
-                            </div>
-                        </div>
-                    </section>
+                    
                 </div>
             </div>
 

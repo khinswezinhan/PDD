@@ -10,14 +10,14 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('pagoda_vectors', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('pagoda_id')->constrained('pagodas')->onDelete('cascade');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('pagoda_vectors', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('pagoda_id')->constrained('pagodas')->onDelete('cascade');
+        $table->text('embedding')->nullable(); // AI Vector တွေ သိမ်းရန်
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
