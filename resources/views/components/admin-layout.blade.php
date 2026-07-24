@@ -156,9 +156,8 @@
     <div class="d-flex main-wrapper" style="min-height: calc(100vh - 56px); width: 100%;">
 
         <!-- [ဘယ်ဘက်ခြမ်း] - Sidebar -->
-        <aside x-data="{ collapsed: false }" :class="collapsed ? 'w-14 min-w-[56px]' : 'w-[210px] min-w-[210px]'"
+        <aside x-data="{ collapsed: false }" :class="collapsed ? 'w-14 min-w-[56px]' : 'w-64 min-w-[256px]'"
             class="bg-white border-end sidebar-container transition-all duration-300 relative flex-shrink-0">
-
             <!-- Collapsed Toggle Button -->
             <button @click="collapsed = !collapsed" type="button" style="right: -10px;"
                 class="absolute top-3 bg-white border border-gray-300 rounded-full w-5 h-5 flex items-center justify-center text-gray-600 shadow-md hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-200 z-50 cursor-pointer"

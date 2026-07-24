@@ -3,6 +3,7 @@
         html {
             scroll-behavior: smooth;
         }
+
         /* Pagination နှင့် ခေါင်းစဉ်များ ကွက်တိဖြစ်စေမည့် Style */
         .custom-pagination-wrapper {
             margin-top: 2rem !important;
@@ -17,7 +18,7 @@
         .custom-pagination-wrapper nav svg {
             display: inline-block;
         }
-        
+
         /* Pagination Links နှင့် Buttons များအတွက် ပုံမှန်အရောင် (Background နဲ့ Text ပါ ဖြည့်ပေးထားသည်) */
         .custom-pagination-wrapper nav a,
         .custom-pagination-wrapper nav button,
@@ -25,9 +26,12 @@
         .famous-pagination-wrapper nav a,
         .famous-pagination-wrapper nav button,
         .famous-pagination-wrapper nav span:not([aria-current="page"]):not([aria-disabled="true"]) span {
-            color: #1f2937 !important;          /* စာသားအရောင် အမည်းရောင် */
-            background-color: #ffffff !important;  /* နောက်ခံ အဖြူရောင် */
-            border-color: #d1d5db !important;      /* ဘောင် မီးခိုးရောင် */
+            color: #1f2937 !important;
+            /* စာသားအရောင် အမည်းရောင် */
+            background-color: #ffffff !important;
+            /* နောက်ခံ အဖြူရောင် */
+            border-color: #d1d5db !important;
+            /* ဘောင် မီးခိုးရောင် */
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
 
@@ -38,6 +42,7 @@
             border-color: #f97316 !important;
             color: white !important;
         }
+
         .custom-pagination-wrapper nav a:hover,
         .custom-pagination-wrapper nav button:hover {
             background-color: #fff7ed !important;
@@ -52,6 +57,7 @@
             border-color: #0891b2 !important;
             color: white !important;
         }
+
         .famous-pagination-wrapper nav a:hover,
         .famous-pagination-wrapper nav button:hover {
             background-color: #ecfeff !important;
@@ -72,19 +78,18 @@
     </style>
 
     {{-- Slider Section --}}
-    <div class="pt-20 w-full"> 
-        <div x-data="{ 
-                activeSlide: 1, 
-                slides: [
-                    { id: 1, title: 'Buddhism', subtitle: 'And Meditation', desc: 'For The Modern World', image: '{{ asset('images/home1.png') }}' },
-                    { id: 2, title: 'Peace & Mind', subtitle: 'Find Inner Peace', desc: 'Discover the path of mindfulness and tranquility.', image: '{{ asset('images/home2.png') }}' },
-                    { id: 3, title: 'Digital Directory', subtitle: 'Explore Pagodas', desc: 'Locate famous pagodas across states and divisions easily.', image: '{{ asset('images/home3.png') }}' }
-                ],
-                next() { this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1 },
-                prev() { this.activeSlide = this.activeSlide === 1 ? this.slides.length : this.activeSlide - 1 }
-               }" 
-             x-init="setInterval(() => next(), 5000)" 
-             class="relative bg-gray-950 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden shadow-sm w-full">
+    <div class="pt-20 w-full">
+        <div x-data="{
+            activeSlide: 1,
+            slides: [
+                { id: 1, title: 'Buddhism', subtitle: 'And Meditation', desc: 'For The Modern World', image: '{{ asset('images/home1.png') }}' },
+                { id: 2, title: 'Peace & Mind', subtitle: 'Find Inner Peace', desc: 'Discover the path of mindfulness and tranquility.', image: '{{ asset('images/home2.png') }}' },
+                { id: 3, title: 'Digital Directory', subtitle: 'Explore Pagodas', desc: 'Locate famous pagodas across states and divisions easily.', image: '{{ asset('images/home3.png') }}' }
+            ],
+            next() { this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1 },
+            prev() { this.activeSlide = this.activeSlide === 1 ? this.slides.length : this.activeSlide - 1 }
+        }" x-init="setInterval(() => next(), 5000)" x-cloak
+            class="relative bg-gray-950 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden shadow-sm w-full">
 
             <template x-for="slide in slides" :key="slide.id">
                 <div x-show="activeSlide === slide.id" x-transition:enter="transition ease-out duration-1000"
@@ -152,7 +157,7 @@
                         <div>
                             <a href="{{ route('division.show', $division->id) }}"
                                 class="block h-40 bg-gray-100 relative overflow-hidden">
-                               
+
                                 <img src="{{ asset($division->photo) }}" alt="{{ $division->photo }}"
                                     class="w-full h-full object-cover hover:scale-105 transition duration-300">
                             </a>
@@ -200,7 +205,8 @@
         <div class="text-center mb-10">
             <h2 class="text-2xl font-bold tracking-tight">
                 <!-- ဤနေရာတွင် text-orange-500 အဖြစ်ပြောင်းလဲပေးထားပါသည် -->
-                <a href="{{ url('/#famous-pagodas') }}" class="text-orange-500 hover:text-orange-600 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
+                <a href="{{ url('/#famous-pagodas') }}"
+                    class="text-orange-500 hover:text-orange-600 transition duration-150 ease-in-out font-extrabold decoration-none whitespace-nowrap">
                     တန်ခိုးကြီးဘုရားများ
                 </a>
             </h2>
@@ -211,25 +217,26 @@
         <div id="famous-ajax-container">
             <div class="px-6 sm:px-8 grid grid-cols-1 sm:px-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 @forelse($famousPagodas as $pagoda)
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
+                    <div
+                        class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col justify-between text-sm group">
                         <div>
                             <div class="h-40 bg-gray-200 relative overflow-hidden">
                                 <a href="{{ route('pagoda.show', $pagoda->id) }}" class="block w-full h-full">
-                                    @if($pagoda->photo)
-                                        <img src="{{ asset($pagoda->photo) }}" 
-                                             alt="{{ $pagoda->name }}" 
-                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    @if ($pagoda->photo)
+                                        <img src="{{ asset($pagoda->photo) }}" alt="{{ $pagoda->name }}"
+                                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                     @else
-                                        <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda" 
-                                             alt="{{ $pagoda->name }}" 
-                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                        <img src="https://placehold.co/600x400/f3f4f6/0891b2?text=Pagoda"
+                                            alt="{{ $pagoda->name }}"
+                                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                     @endif
                                 </a>
                             </div>
 
                             <div class="p-4">
                                 <h3 class="text-base font-bold text-gray-900 leading-snug">
-                                    <a href="{{ route('pagoda.show', $pagoda->id) }}" class="text-gray-900 hover:text-cyan-600 transition decoration-none">
+                                    <a href="{{ route('pagoda.show', $pagoda->id) }}"
+                                        class="text-gray-900 hover:text-cyan-600 transition decoration-none">
                                         {{ $pagoda->name }}
                                     </a>
                                 </h3>
@@ -238,9 +245,10 @@
                                 </p>
                             </div>
                         </div>
-                        
+
                         <div class="px-4 pb-4 pt-0">
-                            <a href="{{ route('pagoda.show', $pagoda->id) }}" class="inline-block text-orange-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
+                            <a href="{{ route('pagoda.show', $pagoda->id) }}"
+                                class="inline-block text-orange-600 font-semibold hover:text-cyan-700 text-xs decoration-none">
                                 အသေးစိတ်ဖတ်ရန် →
                             </a>
                         </div>
@@ -290,14 +298,16 @@
                     .then(html => {
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
-                        
+
                         if (isFamous) {
                             const newContent = doc.querySelector('#famous-ajax-container');
                             const oldContent = document.querySelector('#famous-ajax-container');
 
                             if (newContent && oldContent) {
                                 oldContent.innerHTML = newContent.innerHTML;
-                                document.querySelector('#famous-pagodas').scrollIntoView({ behavior: 'smooth' });
+                                document.querySelector('#famous-pagodas').scrollIntoView({
+                                    behavior: 'smooth'
+                                });
                             }
                         } else {
                             const newContent = doc.querySelector('#regions-ajax-container');
@@ -305,7 +315,9 @@
 
                             if (newContent && oldContent) {
                                 oldContent.innerHTML = newContent.innerHTML;
-                                document.querySelector('#regions-pagodas').scrollIntoView({ behavior: 'smooth' });
+                                document.querySelector('#regions-pagodas').scrollIntoView({
+                                    behavior: 'smooth'
+                                });
                             }
                         }
                     })
