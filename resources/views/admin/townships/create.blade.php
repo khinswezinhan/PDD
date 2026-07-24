@@ -84,14 +84,14 @@
 
                 {{-- Form Action Buttons --}}
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-4">
-                    {{-- မလုပ်တော့ပါ Button (မီးခိုးရောင်) --}}
-                    <a href="{{ route('admin.townships.index') }}" class="btn btn-secondary px-4 py-2 rounded-2 fw-medium">
+                    <a href="{{ route('admin.townships.index') }}"
+                        class="btn btn-outline-secondary px-4 py-2 rounded-2 fw-medium">
                         မလုပ်တော့ပါ
                     </a>
 
-                    {{-- သိမ်းမည် Button (လိမ္မော်ရောင်) --}}
                     <button type="submit"
-                        class="btn text-white px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm orange-btn">
+                        class="btn text-white px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm orange-btn"
+                        style="background-color: #f97316; border-color: #f97316;">
                         သိမ်းမည်
                     </button>
                 </div>

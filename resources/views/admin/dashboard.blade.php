@@ -88,7 +88,7 @@
 
             {{-- Total Pagoda Card --}}
             <div
-                class="bg-white h-full rounded-lg shadow-sm border-solid border-l-4 border-orange-500 transition-all duration-300 hover:border-orange-600 hover:-translate-y-1 hover:shadow-md cursor-pointer transform">
+                class="bg-white h-full rounded-lg shadow-sm border-solid border-l-4 border-orange-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer transform">
                 <div class="p-6 flex justify-between items-start">
                     <div>
                         <p class="uppercase text-gray-500 text-xs font-bold tracking-wider mb-1">Total Pagoda</p>

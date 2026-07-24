@@ -68,7 +68,7 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-light border-bottom border-secondary-subtle">
-                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">
+                        <tr class="text-secondary text-uppercase fw-bold" style="font-size: 0.875rem; ">
                             <th scope="col" class="ps-4 py-3 text-center" style="width: 80px;">No</th>
                             <th scope="col" class="py-3 ps-3">Name</th>
                             <th scope="col" class="py-3 ps-3">Role</th>

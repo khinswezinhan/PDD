@@ -51,8 +51,10 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+            <x-primary-button
+                class="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-500 px-4 py-2 text-xs">
+                {{ __('Save') }}
+            </x-primary-button>
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600">{{ __('Saved.') }}</p>

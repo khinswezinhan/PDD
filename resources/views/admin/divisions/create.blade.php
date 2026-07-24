@@ -57,7 +57,8 @@
                     </a>
 
                     <button type="submit"
-                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm"
+                        style="background-color: #f97316; border-color: #f97316;">
                         သိမ်းဆည်းရန်
                     </button>
                 </div>

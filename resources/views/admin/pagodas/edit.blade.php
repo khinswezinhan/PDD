@@ -230,10 +230,11 @@
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top border-light-subtle mt-4">
                     <a href="{{ route('admin.pagodas.index') }}"
                         class="btn btn-outline-secondary px-4 py-2 rounded-2 fw-medium">
-                        Cancel
+                        မလုပ်တော့ပါ
                     </a>
                     <button type="submit"
-                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        class="btn btn-primary px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm"
+                        style="background-color: #f97316; border-color: #f97316;">
                         <i class="fas fa-save"></i> ပြင်ဆင်မှုများသိမ်းမည်
                     </button>
                 </div>
